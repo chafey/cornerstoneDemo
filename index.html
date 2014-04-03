@@ -5,6 +5,9 @@
 </head>
 <style>
 
+    .hidden {
+        display: none;
+    }
 </style>
 <body>
 <div id="wrap">
@@ -14,34 +17,44 @@
             <h1>
                 Cornerstone Demo
             </h1>
-            <p>
-                Select a study below to view it.
-                <br>
-            </p>
-
         </div>
 
-        <div class="row">
-            <table class="col-md-12 table table-striped">
-                <thead>
-                    <tr>
-                        <th>Patient Name</th>
-                        <th>Patient ID</th>
-                        <th>Study Date</th>
-                        <th>Modality</th>
-                        <th>Study Description</th>
-                        <th># Images</th>
-                    </tr>
-                </thead>
-                <tbody id="studyList">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#studyList" data-toggle="tab">Study List</a></li>
+        </ul>
 
-                </tbody>
-            </table>
+        <div id="tabContent" class="tab-content">
+            <div id="studyList" class="tab-pane active">
+                <div class="row">
+                    <table class="col-md-12 table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Patient ID</th>
+                            <th>Study Date</th>
+                            <th>Modality</th>
+                            <th>Study Description</th>
+                            <th># Images</th>
+                        </tr>
+                        </thead>
+                        <tbody id="studyListData">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        <div id="studyViewerTemplate" class="tab-pane active hidden">
+            <div class="row">
+                Images go here!
+            </div>
+        </div>
+
 
 <div id="footer">
     <div class="navbar navbar-inner navbar-fixed-bottom container">
-        <strong>You need an HTLM5 browser, Google Chrome is recommended</strong>
+        <strong>This demo requires a HTLM5 browser, Google Chrome is recommended</strong>
         <br>
         Read about the <a href="architecture.html">architecture</a> for this demo
     </div>
@@ -54,6 +67,13 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" ></script>
 
 <script>
+
+    $('#tabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+
+
     $.getJSON('studyList.json', function(data)
     {
         data.studyList.forEach(function(study) {
@@ -65,13 +85,24 @@
                     study.studyDescription + '</td><td>' +
                     study.numImages + '</td><td>' +
                     '</tr>';
-             var studyRowElement = $('#studyList').append(studyRow);
+             var studyRowElement = $('#studyListData').append(studyRow);
             $(studyRowElement).click(function() {
-                // TODO: Open study viewer
-                console.log("study clicked");
+                // Add new tab for this study and switch to it
+                var studyTab = '<li><a href="#x' + study.patientId + '" data-toggle="tab">' + study.patientName + '</a></li>';
+                $('#tabs').append(studyTab);
+
+                // add tab content by making a copy of the studyViewerTemplate element
+                var studyViewerCopy = $('#studyViewerTemplate').clone();
+                studyViewerCopy.attr("id", 'x' + study.patientId);
+                studyViewerCopy.removeClass('hidden');
+                studyViewerCopy.appendTo('#tabContent');
+
+                // show the new tab (which will be the last one since it was just added
+                $('#tabs a:last').tab('show');
+
+                // Now load the study.json
             });
         });
-
     });
 
 </script>
