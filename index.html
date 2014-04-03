@@ -129,15 +129,28 @@
     {
         $.getJSON(studyId, function(data) {
             // Load the first series into the viewport
-            var url = data.seriesList[0].instanceList[0].imageId;
             $('#wadoURL').val();
+
+            var stack1 = {
+                stackId : '1',
+                imageIds : []
+            };
+
+            data.seriesList[0].instanceList.forEach(function(instance) {
+               stack1.imageIds.push(instance.imageId);
+            });
+
+            var stacks = [
+                stack1
+                ];
 
             // image enable the dicomImage element and activate a few tools
             var element = $('#dicomImage').get(0);
-            cornerstone.enable(element, url);
+            cornerstone.enable(element, stack1.imageIds[0]);
             cornerstoneTools.wwwc.activate(element, 1); //
             cornerstoneTools.pan.activate(element, 2); //
             cornerstoneTools.zoom.activate(element, 3); //
+            cornerstoneTools.scroll(element, stacks, 0);
         });
     }
 
