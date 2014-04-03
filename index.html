@@ -3,26 +3,78 @@
 <head>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+
+</style>
 <body>
+<div id="wrap">
+    <div class="container">
 
-<div class="container">
+        <div class="page-header">
+            <h1>
+                Cornerstone Demo
+            </h1>
+            <p>
+                Select a study below to view it.
+                <br>
+            </p>
 
-    <div class="page-header">
-        <h1>
-            Cornerstone Demo
-        </h1>
-        <p>
-            <strong>You need an HTLM5 browser, Google Chrome is recommended</strong>
-        </p>
+        </div>
 
+        <div class="row">
+            <table class="col-md-12 table table-striped">
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Patient ID</th>
+                        <th>Study Date</th>
+                        <th>Modality</th>
+                        <th>Study Description</th>
+                        <th># Images</th>
+                    </tr>
+                </thead>
+                <tbody id="studyList">
+
+                </tbody>
+            </table>
+        </div>
+
+<div id="footer">
+    <div class="navbar navbar-inner navbar-fixed-bottom container">
+        <strong>You need an HTLM5 browser, Google Chrome is recommended</strong>
+        <br>
+        Read about the <a href="architecture.html">architecture</a> for this demo
     </div>
-
-    <br>
-
-    Read about the <a href="architecture.html">architecture</a> for this demo
+</div>
 
 </div>
 
+<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" ></script>
+
+<script>
+    $.getJSON('studyList.json', function(data)
+    {
+        data.studyList.forEach(function(study) {
+            var studyRow = '<tr><td>' +
+                    study.patientName + '</td><td>' +
+                    study.patientId + '</td><td>' +
+                    study.studyDate + '</td><td>' +
+                    study.modality + '</td><td>' +
+                    study.studyDescription + '</td><td>' +
+                    study.numImages + '</td><td>' +
+                    '</tr>';
+             var studyRowElement = $('#studyList').append(studyRow);
+            $(studyRowElement).click(function() {
+                // TODO: Open study viewer
+                console.log("study clicked");
+            });
+        });
+
+    });
+
+</script>
 
 </body>
 </html>

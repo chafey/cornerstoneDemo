@@ -1,0 +1,12 @@
+{
+    "studyList": [
+        {
+            "patientName" : "Test, Test",
+            "patientId" : "12345",
+            "studyDate" : "20140402",
+            "modality" : "CT",
+            "studyDescription" :"CT HEAD W/WO",
+            "numImages" : 1100
+        }
+    ]
+}
