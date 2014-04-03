@@ -72,7 +72,7 @@
                      unselectable='on'
                      onselectstart='return false;'
                      onmousedown='return false;'>
-                    <div id="dicomImage" class="viewport">
+                    <div class="viewport">
                     </div>
                     <div id="mrtopleft" style="position: absolute;top:0px; left:0px">
                         Patient Name
@@ -125,9 +125,9 @@
         $(this).tab('show')
     })
 
-    function loadStudyJson(studyId)
+    function loadStudyJson(studyViewer, studyId)
     {
-        $.getJSON(studyId, function(data) {
+        $.getJSON('studies/' + studyId, function(data) {
             // Load the first series into the viewport
             $('#wadoURL').val();
 
@@ -145,7 +145,7 @@
                 ];
 
             // image enable the dicomImage element and activate a few tools
-            var element = $('#dicomImage').get(0);
+            var element = $(studyViewer).find('.viewport')[0];
             cornerstone.enable(element, stack1.imageIds[0]);
             cornerstoneTools.wwwc.activate(element, 1); //
             cornerstoneTools.pan.activate(element, 2); //
@@ -166,7 +166,7 @@
                     study.studyDescription + '</td><td>' +
                     study.numImages + '</td><td>' +
                     '</tr>';
-             var studyRowElement = $('#studyListData').append(studyRow);
+             var studyRowElement = $(studyRow).appendTo('#studyListData');
             $(studyRowElement).click(function() {
                 // Add new tab for this study and switch to it
                 var studyTab = '<li><a href="#x' + study.patientId + '" data-toggle="tab">' + study.patientName + '</a></li>';
@@ -182,7 +182,7 @@
                 $('#tabs a:last').tab('show');
 
                 // Now load the study.json
-                loadStudyJson(study.studyId + ".json");
+                loadStudyJson(studyViewerCopy, study.studyId + ".json");
             });
         });
     });

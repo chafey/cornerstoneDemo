@@ -1,13 +1,22 @@
 {
     "studyList": [
         {
-            "patientName" : "Test, Test",
-            "patientId" : "12345",
-            "studyDate" : "20140402",
+            "patientName" : "MISTER^MR",
+            "patientId" : "832040",
+            "studyDate" : "20010108",
+            "modality" : "MR",
+            "studyDescription" :"BRAIN SELLA",
+            "numImages" : 17,
+            "studyId" : "mrstudy"
+        },
+        {
+            "patientName" : "MISTER^CT",
+            "patientId" : "2178309",
+            "studyDate" : "20010105",
             "modality" : "CT",
-            "studyDescription" :"CT HEAD W/WO",
-            "numImages" : 1100,
-            "studyId" : "studyId1"
+            "studyDescription" :"CHEST",
+            "numImages" : 111,
+            "studyId" : "ctstudy"
         }
     ]
 }
