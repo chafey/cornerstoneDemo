@@ -8,6 +8,25 @@
     .hidden {
         display: none;
     }
+
+    /* prevents selection when left click dragging */
+    .disable-selection {
+        -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;
+    }
+
+    /* prevents cursor from changing to the i bar on the overlays*/
+    .noIbar {
+        cursor:default;
+    }
+
+    /* images are displayed in viewports */
+    .viewport {
+        width:512px;
+        height:512px;
+        top:0px;
+        left:0px;
+        position:absolute
+    }
 </style>
 <body>
 <div id="wrap">
@@ -47,7 +66,28 @@
 
         <div id="studyViewerTemplate" class="tab-pane active hidden">
             <div class="row">
-                Images go here!
+                <div style="width:512px;height:512px;position:relative;color: white;display:inline-block;background-color:black;"
+                     oncontextmenu="return false"
+                     class='disable-selection noIbar'
+                     unselectable='on'
+                     onselectstart='return false;'
+                     onmousedown='return false;'>
+                    <div id="dicomImage" class="viewport">
+                    </div>
+                    <div id="mrtopleft" style="position: absolute;top:0px; left:0px">
+                        Patient Name
+                    </div>
+                    <div id="mrtopright" style="position: absolute;top:0px; right:0px">
+                        Hospital
+                    </div>
+                    <div id="mrbottomright" style="position: absolute;bottom:0px; right:0px">
+                        Zoom:
+                    </div>
+                    <div id="mrbottomleft" style="position: absolute;bottom:0px; left:0px">
+                        WW/WC:
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -72,6 +112,13 @@
         e.preventDefault()
         $(this).tab('show')
     })
+
+    function loadStudyJson(studyId)
+    {
+        $.getJSON(studyId, function(data) {
+            // Load the first series into the viewport
+        });
+    }
 
 
     $.getJSON('studyList.json', function(data)
@@ -101,6 +148,7 @@
                 $('#tabs a:last').tab('show');
 
                 // Now load the study.json
+                loadStudyJson(study.studyId + ".json");
             });
         });
     });

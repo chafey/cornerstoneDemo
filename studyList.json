@@ -6,7 +6,8 @@
             "studyDate" : "20140402",
             "modality" : "CT",
             "studyDescription" :"CT HEAD W/WO",
-            "numImages" : 1100
+            "numImages" : 1100,
+            "studyId" : "studyId1"
         }
     ]
 }
