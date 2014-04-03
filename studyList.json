@@ -17,6 +17,15 @@
             "studyDescription" :"CHEST",
             "numImages" : 111,
             "studyId" : "ctstudy"
+        },
+        {
+            "patientName" : "MISTER^CR",
+            "patientId" : "9227465",
+            "studyDate" : "20010109",
+            "modality" : "CR",
+            "studyDescription" :"pelvis",
+            "numImages" : 2,
+            "studyId" : "crstudy"
         }
     ]
 }
