@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 
 <div id="footer">
     <div class="navbar navbar-inner navbar-fixed-bottom container">
@@ -106,7 +106,19 @@
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" ></script>
 
-<script>
+<!-- include the cornerstone library -->
+<script src="cornerstone.js"></script>
+
+<!-- include the cornerstone tools library -->
+<script src="cornerstone-tools.js"></script>
+
+<!-- include the cornerstoneWADOImageLoader library -->
+<script src="cornerstoneWADOImageLoader.js"></script>
+
+<!-- include the cornerstoneWADOImageLoader library -->
+<script src="dicomParser.js"></script>
+
+    <script>
 
     $('#tabs a').click(function (e) {
         e.preventDefault()
@@ -117,6 +129,15 @@
     {
         $.getJSON(studyId, function(data) {
             // Load the first series into the viewport
+            var url = data.seriesList[0].instanceList[0].imageId;
+            $('#wadoURL').val();
+
+            // image enable the dicomImage element and activate a few tools
+            var element = $('#dicomImage').get(0);
+            cornerstone.enable(element, url);
+            cornerstoneTools.wwwc.activate(element, 1); //
+            cornerstoneTools.pan.activate(element, 2); //
+            cornerstoneTools.zoom.activate(element, 3); //
         });
     }
 
