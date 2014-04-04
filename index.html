@@ -27,6 +27,10 @@
         left:0px;
         position:absolute
     }
+
+    .overlay {
+        position: absolute
+    }
 </style>
 <body>
 <div id="wrap">
@@ -39,6 +43,8 @@
             Note - this demo currently obtains images by going through a proxy which seems to be corrupting the images,
             I don't think that cornerstone itself is the cause of this corruption.  To fix the image corruption you
             will need to clear your browsers cache.
+            <br>
+            Controls: Left click drag to ww/wl, middle click drag to pan, right click drag to zoom, mouse wheel to scroll through stack
         </div>
 
         <ul id="tabs" class="nav nav-tabs">
@@ -90,16 +96,19 @@
                          onmousedown='return false;'>
                         <div class="viewport">
                         </div>
-                        <div id="mrtopleft" style="position: absolute;top:0px; left:0px">
-                            Patient Name
+                        <div class="overlay" style="top:0px; left:0px">
+                            <div>Patient Name</div>
+                            <div>Patient Id</div>
                         </div>
-                        <div id="mrtopright" style="position: absolute;top:0px; right:0px">
-                            Hospital
+                        <div class="overlay" style="top:0px; right:0px">
+                            <div>Study Description</div>
+                            <div>Study Date</div>
                         </div>
-                        <div id="mrbottomright" style="position: absolute;bottom:0px; right:0px">
-                            Zoom:
+                        <div class="overlay" style="bottom:0px; right:0px">
+                            <div>Image #:</div>
+                            <div>Zoom:</div>
                         </div>
-                        <div id="mrbottomleft" style="position: absolute;bottom:0px; left:0px">
+                        <div class="overlay" style="bottom:0px; left:0px">
                             WW/WC:
                         </div>
 
@@ -165,13 +174,35 @@
                 stacks.push(stack);
             });
 
+
+
             // image enable the dicomImage element and activate a few tools
             var element = $(studyViewer).find('.viewport')[0];
+            var parent = $(element).parent();
+            var childDivs = $(parent).find('.overlay');
+            var topLeft = $(childDivs[0]).find('div');
+            $(topLeft[0]).text(data.patientName);
+            $(topLeft[1]).text(data.patientId);
+            var topRight= $(childDivs[1]).find('div');
+            $(topRight[0]).text(data.studyDescription);
+            $(topRight[1]).text(data.studyDate);
+            var bottomLeft = $(childDivs[2]).find('div');
+            $(bottomLeft[1]).text("# Images: " + stacks[0].imageIds.length);
+
+            function onViewportUpdated(e) {
+                $(childDivs[3]).text("WW/WL:" + Math.round(e.detail.viewport.windowWidth) + "/" + Math.round(e.detail.viewport.windowCenter));
+                $(bottomLeft[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
+            };
+            element.addEventListener("CornerstoneViewportUpdated", onViewportUpdated, false);
+
+
             cornerstone.enable(element, stacks[0].imageIds[0]);
             cornerstoneTools.wwwc.activate(element, 1); //
             cornerstoneTools.pan.activate(element, 2); //
             cornerstoneTools.zoom.activate(element, 3); //
             cornerstoneTools.stackScroll.enable(element, stacks[0], 0);
+
+
 
             function disableAllTools()
             {
@@ -214,6 +245,7 @@
                     cornerstoneTools.stackScroll.disable(element);
                     cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
                     cornerstone.newStack(element, stacks[stack.seriesIndex].imageIds[0]);
+                    $(bottomLeft[1]).text("# Images: " + stacks[stack.seriesIndex].imageIds.length);
                 });
             });
         });
