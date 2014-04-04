@@ -130,6 +130,20 @@
         image.maxPixelValue = max;
     }
 
+
+    function invertPixels(image)
+    {
+        var min = image.minPixelValue;
+        var max = image.maxPixelValue;
+        var numPixels = image.width * image.height;
+        var pixelData = image.storedPixelData;
+        for(var index = 0; index < numPixels; index++) {
+            var spv = pixelData[index];
+            pixelData[index] = min + max - spv;
+        }
+    }
+
+
     function createImageObject(dicomPart10AsArrayBuffer)
     {
         // Parse the DICOM File
@@ -162,12 +176,30 @@
             data: dataSet
         };
 
+
         // TODO: deal with pixel padding and all of the various issues by setting it to min pixel value (or lower)
         // TODO: deal with MONOCHROME1 - either invert pixel data or add support to cornerstone
         // TODO: Add support for color by converting all formats to RGB
         // TODO: Mask out overlays embedded in pixel data above high bit
 
         setMinMaxPixelValue(image);
+
+        // invert pixels if monochrome1
+        var photometricInterpretation = dataSet.string('x00280004');
+        if(photometricInterpretation !== undefined) {
+            if(photometricInterpretation.trim() === "MONOCHROME1")
+            {
+                invertPixels(image);
+            }
+        }
+
+        if(image.windowCenter === undefined) {
+            var maxVoi = image.maxPixelValue * image.slope + image.intercept;
+            var minVoi = image.minPixelValue * image.slope + image.intercept;
+            image.windowWidth = maxVoi - minVoi;
+            image.windowCenter = (maxVoi + minVoi) / 2;
+        }
+
 
         return image;
     }

@@ -8,6 +8,25 @@
     "studyId" : "ctstudy",
     "seriesList" : [
         {
+            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.887",
+            "seriesDescription": "SCOUT PA",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId": "http://www.corsproxy.com/chafey.github.io/cornerstoneDemo/studies/CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668949.888.dcm"}
+            ]
+        },
+        {
+            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.887",
+            "seriesDescription": "SCOUT LAT",
+            "seriesNumber" : "1.1",
+            "instanceList" : [
+                {"imageId": "http://www.corsproxy.com/chafey.github.io/cornerstoneDemo/studies/CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668949.889.dcm"}
+            ]
+        },
+        {
+            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.890",
+            "seriesDescription": "HELICAL CHEST",
+            "seriesNumber" : "2",
             "instanceList" : [
                 {"imageId": "http://www.corsproxy.com/chafey.github.io/cornerstoneDemo/studies/CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668950.109.dcm"},
                 {"imageId": "http://www.corsproxy.com/chafey.github.io/cornerstoneDemo/studies/CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668950.110.dcm"},
