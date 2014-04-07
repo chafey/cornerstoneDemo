@@ -11,14 +11,14 @@
             "seriesDescription": "Pelvis",
             "seriesNumber" : "1",
             "instanceList" : [
-                {"imageId" : "http://www.corsproxy.com/chafey.github.io/cornerstoneDemo/studies/CRStudy/1.3.51.5145.5142.20010109.1105627.1.0.1.dcm"}
+                {"imageId" : "CRStudy/1.3.51.5145.5142.20010109.1105627.1.0.1.dcm"}
             ]
         },
         {
             "seriesDescription": "Lat. Pelvis",
             "seriesNumber" : "1",
             "instanceList" : [
-                { "imageId" : "http://www.corsproxy.com/chafey.github.io/cornerstoneDemo/studies/CRStudy/1.3.51.5145.5142.20010109.1105752.1.0.1.dcm" }
+                { "imageId" : "CRStudy/1.3.51.5145.5142.20010109.1105752.1.0.1.dcm" }
             ]
         }
     ]

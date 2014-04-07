@@ -40,9 +40,6 @@
             <h1>
                 Cornerstone Demo
             </h1>
-            Note - this demo currently obtains images by going through a proxy which seems to be corrupting the images,
-            I don't think that cornerstone itself is the cause of this corruption.  To fix the image corruption you
-            will need to clear your browsers cache.
             <br>
             Controls: Left click drag to ww/wl, middle click drag to pan, right click drag to zoom, mouse wheel to scroll through stack
         </div>
@@ -168,7 +165,8 @@
                     seriesIndex : seriesIndex
                 }
                 series.instanceList.forEach(function(image) {
-                    stack.imageIds.push(image.imageId);
+                    var imageId = "http://cornerstonetech.org/images/ClearCanvas/" + image.imageId;
+                    stack.imageIds.push(imageId);
                 });
                 seriesIndex++;
                 stacks.push(stack);
