@@ -26,6 +26,15 @@
             "studyDescription" :"pelvis",
             "numImages" : 2,
             "studyId" : "crstudy"
+        },
+        {
+            "patientName" : "MISTER^DX",
+            "patientId" : "3524578",
+            "studyDate" : "20010109",
+            "modality" : "DX",
+            "studyDescription" :"CHEST",
+            "numImages" : 2,
+            "studyId" : "dxstudy"
         }
     ]
 }
