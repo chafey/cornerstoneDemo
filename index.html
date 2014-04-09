@@ -21,8 +21,8 @@
 
     /* images are displayed in viewports */
     .viewport {
-        width:512px;
-        height:512px;
+        width:100%;
+        height:100%;
         top:0px;
         left:0px;
         position:absolute
@@ -30,6 +30,13 @@
 
     .overlay {
         position: absolute
+    }
+
+    .imageViewer {
+    }
+
+    .viewportWrapper {
+
     }
 </style>
 <body>
@@ -50,7 +57,7 @@
             <li class="active"><a href="#studyList" data-toggle="tab">Study List</a></li>
         </ul>
 
-        <div id="tabContent" class="tab-content">
+        <div id="tabContent" class="tab-content" style="height:100%">
             <div id="studyList" class="tab-pane active">
                 <div class="row">
                     <table class="col-md-12 table table-striped">
@@ -80,41 +87,42 @@
                     </div>
                 </div>
                 <div class="col-xs-8">
-                    <br>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="glyphicon glyphicon-adjust"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="glyphicon glyphicon-zoom-in"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Pan"><span class="glyphicon glyphicon-hand-right"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="glyphicon glyphicon-align-justify"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="glyphicon glyphicon-resize-full"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="glyphicon glyphicon-screenshot"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="glyphicon glyphicon-unchecked"></span></button>
-                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="glyphicon glyphicon-stop"></span></button>
-                    <br>
-                    <div style="width:512px;height:512px;position:relative;color: white;display:inline-block;background-color:black;"
-                         oncontextmenu="return false"
-                         class='disable-selection noIbar'
-                         unselectable='on'
-                         onselectstart='return false;'
-                         onmousedown='return false;'>
-                        <div class="viewport">
-                        </div>
-                        <div class="overlay" style="top:0px; left:0px">
-                            <div>Patient Name</div>
-                            <div>Patient Id</div>
-                        </div>
-                        <div class="overlay" style="top:0px; right:0px">
-                            <div>Study Description</div>
-                            <div>Study Date</div>
-                        </div>
-                        <div class="overlay" style="bottom:0px; right:0px">
-                            <div>Image #:</div>
-                            <div>Zoom:</div>
-                        </div>
-                        <div class="overlay" style="bottom:0px; left:0px">
-                            WW/WC:
-                        </div>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="glyphicon glyphicon-adjust"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="glyphicon glyphicon-zoom-in"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="glyphicon glyphicon-hand-right"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="glyphicon glyphicon-align-justify"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="glyphicon glyphicon-resize-full"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="glyphicon glyphicon-screenshot"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="glyphicon glyphicon-unchecked"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="glyphicon glyphicon-stop"></span></button>
+                    <div class="imageViewer">
+                        <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
+                             oncontextmenu="return false"
+                             class='disable-selection noIbar'
+                             unselectable='on'
+                             onselectstart='return false;'
+                             onmousedown='return false;'>
+                            <div class="viewport">
+                            </div>
+                            <div class="overlay" style="top:0px; left:0px">
+                                <div>Patient Name</div>
+                                <div>Patient Id</div>
+                            </div>
+                            <div class="overlay" style="top:0px; right:0px">
+                                <div>Study Description</div>
+                                <div>Study Date</div>
+                            </div>
+                            <div class="overlay" style="bottom:0px; right:0px">
+                                <div>Image #:</div>
+                                <div>Zoom:</div>
+                            </div>
+                            <div class="overlay" style="bottom:0px; left:0px">
+                                WW/WC:
+                            </div>
 
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -199,6 +207,13 @@
                 seriesIndex++;
                 stacks.push(stack);
             });
+
+            // resize the parent div of the viewport to fit the screen
+            var imageViewer = $(studyViewer).find('.imageViewer')[0];
+            var viewportWrapper = $(imageViewer).find('.viewportWrapper')[0];
+            viewportWrapper.style.width = window.innerWidth - 400+ "px";
+            viewportWrapper.style.height= window.innerHeight - 300 + "px";
+
 
             // image enable the dicomImage element and activate a few tools
             var element = $(studyViewer).find('.viewport')[0];
