@@ -4,6 +4,32 @@ var cornerstoneCore = (function (cornerstoneCore) {
         cornerstoneCore = {};
     }
 
+    // Polyfill CustomEvent for IE9-11
+    if(window.CustomEvent === undefined) {
+        (function () {
+            function CustomEvent ( event, params ) {
+                params = params || { bubbles: false, cancelable: false, detail: undefined };
+                var evt = document.createEvent( 'CustomEvent' );
+                evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+                return evt;
+            };
+
+            CustomEvent.prototype = window.Event.prototype;
+
+            window.CustomEvent = CustomEvent;
+        })();
+    }
+
+
+    return cornerstoneCore;
+}(cornerstoneCore));
+
+
+var cornerstoneCore = (function (cornerstoneCore) {
+    if(cornerstoneCore === undefined) {
+        cornerstoneCore = {};
+    }
+
     function distanceSquared(pt1, pt2)
     {
         var dx = pt1.x - pt2.x;
