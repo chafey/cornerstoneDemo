@@ -2,6 +2,7 @@
 <html>
 <head>
     <link href="http://bootswatch.com/cyborg/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <style>
 
@@ -87,14 +88,14 @@
                     </div>
                 </div>
                 <div class="col-xs-10">
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="glyphicon glyphicon-adjust"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="glyphicon glyphicon-zoom-in"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="glyphicon glyphicon-hand-right"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="glyphicon glyphicon-align-justify"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="glyphicon glyphicon-resize-full"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="glyphicon glyphicon-screenshot"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="glyphicon glyphicon-unchecked"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="glyphicon glyphicon-stop"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="fa fa-adjust"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="fa fa-search"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="fa fa-arrows"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
                     <div class="imageViewer">
                         <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
                              oncontextmenu="return false"
@@ -113,7 +114,7 @@
                                 <div>Study Date</div>
                             </div>
                             <div class="overlay" style="bottom:0px; right:0px">
-                                <div>Image #:</div>
+                                <div class="currentImageAndTotalImages">Image #:</div>
                                 <div>Zoom:</div>
                             </div>
                             <div class="overlay" style="bottom:0px; left:0px">
@@ -230,7 +231,15 @@
                 $(bottomLeft[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
             };
             element.addEventListener("CornerstoneViewportUpdated", onViewportUpdated, false);
-
+            function onNewImage(e) {
+                var stackData = cornerstoneTools.getToolState(element, 'stack');
+                if(stackData === undefined || stackData.data === undefined || stackData.data.length === 0) {
+                    return;
+                }
+                var stack = stackData.data[0];
+                $(bottomLeft[1]).text("Image #" + (stack.currentImageIdIndex + 1) + "/" + stack.imageIds.length);
+            }
+            element.addEventListener("CornerstoneNewImage", onNewImage, false);
 
             var imageId = stacks[0].imageIds[0];
 
@@ -265,6 +274,7 @@
                 cornerstoneTools.length.deactivate(element, 1);
                 cornerstoneTools.ellipticalRoi.deactivate(element, 1);
                 cornerstoneTools.rectangleRoi.deactivate(element, 1);
+                cornerstoneTools.stackScroll.deactivate(element, 1);
             }
 
             var buttons = $(studyViewer).find('button');
