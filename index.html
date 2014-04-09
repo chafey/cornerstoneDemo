@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://bootswatch.com/cyborg/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
 
@@ -34,22 +34,18 @@
 </style>
 <body>
 <div id="wrap">
-    <div class="container">
-
-        <div class="page-header">
-            <h1>
-                Cornerstone Demo
-            </h1>
-            <div class="well">
-                <ol>
-                    <li>Select a study in the study list to view its images, a new tab will be created for each study.</li>
-                    <li>Interact with the image using your mouse: left click drag - ww/wl, middle click drag - pan, right click drag - zoom, mouse wheel - scroll through stack</li>
-                    <li>Select another series to display by left click the series list on the left</li>
-                    <li>Select another tool to use with the left mouse button by selecting the tool button</li>
-                </ol>
+    <nav class="navbar navbar-default" rol="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="https://github.com/chafey/cornerstone">Cornerstone</a>
             </div>
-        </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="help" href="#" class="button">Help</a></li>
+            </ul>
 
+        </div>
+    </nav>
+    <div class="container">
         <ul id="tabs" class="nav nav-tabs">
             <li class="active"><a href="#studyList" data-toggle="tab">Study List</a></li>
         </ul>
@@ -85,14 +81,14 @@
                 </div>
                 <div class="col-xs-8">
                     <br>
-                    <button type="button" class="btn">WW/WC</button>
-                    <button type="button" class="btn">Zoom</button>
-                    <button type="button" class="btn">Pan</button>
-                    <button type="button" class="btn">Scroll</button>
-                    <button type="button" class="btn">Length</button>
-                    <button type="button" class="btn">Probe</button>
-                    <button type="button" class="btn">Elliptical ROI</button>
-                    <button type="button" class="btn">Rectangle ROI</button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="glyphicon glyphicon-adjust"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="glyphicon glyphicon-zoom-in"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Pan"><span class="glyphicon glyphicon-hand-right"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="glyphicon glyphicon-align-justify"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="glyphicon glyphicon-resize-full"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="glyphicon glyphicon-screenshot"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="glyphicon glyphicon-unchecked"></span></button>
+                    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="glyphicon glyphicon-stop"></span></button>
                     <br>
                     <div style="width:512px;height:512px;position:relative;color: white;display:inline-block;background-color:black;"
                          oncontextmenu="return false"
@@ -126,13 +122,35 @@
 
 <div id="footer">
     <div class="navbar navbar-inner navbar-fixed-bottom container">
-        <strong>This demo requires a HTLM5 browser, Google Chrome is recommended</strong>
-        <br>
+        <strong>This demo requires a HTLM5 browser, Google Chrome is recommended.</strong>
         Read about the <a href="architecture.html">architecture</a> for this demo
     </div>
 </div>
 
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <ol>
+                    <li>Select a study in the study list to view its images, a new tab will be created for each study.</li>
+                    <li>Interact with the image using your mouse: left click drag - ww/wl, middle click drag - pan, right click drag - zoom, mouse wheel - scroll through stack</li>
+                    <li>Select another series to display by left click the series list on the left</li>
+                    <li>Select another tool to use with the left mouse button by selecting the tool button</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
 
@@ -271,6 +289,14 @@
                 disableAllTools();
                 cornerstoneTools.rectangleRoi.activate(element, 1);
             });
+            $(buttons[0]).tooltip();
+            $(buttons[1]).tooltip();
+            $(buttons[2]).tooltip();
+            $(buttons[3]).tooltip();
+            $(buttons[4]).tooltip();
+            $(buttons[5]).tooltip();
+            $(buttons[6]).tooltip();
+            $(buttons[7]).tooltip();
 
             var seriesList = $(studyViewer).find('.list-group')[0];
             stacks.forEach(function(stack) {
@@ -322,6 +348,12 @@
             });
         });
     });
+
+    $("#help").click(function() {
+        $("#myModal").modal();
+    });
+
+
 
 </script>
 
