@@ -52,7 +52,7 @@
 
         </div>
     </nav>
-    <div class="container">
+    <div">
         <ul id="tabs" class="nav nav-tabs">
             <li class="active"><a href="#studyList" data-toggle="tab">Study List</a></li>
         </ul>
@@ -60,7 +60,7 @@
         <div id="tabContent" class="tab-content" style="height:100%">
             <div id="studyList" class="tab-pane active">
                 <div class="row">
-                    <table class="col-md-12 table table-striped">
+                    <table style="margin-left:10px" class="col-md-12 table table-striped">
                         <thead>
                         <tr>
                             <th>Patient Name</th>
@@ -86,7 +86,7 @@
                     <div class="list-group">
                     </div>
                 </div>
-                <div class="col-xs-8">
+                <div class="col-xs-10">
                     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="glyphicon glyphicon-adjust"></span></button>
                     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="glyphicon glyphicon-zoom-in"></span></button>
                     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="glyphicon glyphicon-hand-right"></span></button>
@@ -127,14 +127,6 @@
             </div>
         </div>
     </div>
-
-<div id="footer">
-    <div class="navbar navbar-inner navbar-fixed-bottom container">
-        <strong>This demo requires a HTLM5 browser, Google Chrome is recommended.</strong>
-        Read about the <a href="architecture.html">architecture</a> for this demo
-    </div>
-</div>
-
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -151,7 +143,11 @@
                     <li>Select another series to display by left click the series list on the left</li>
                     <li>Select another tool to use with the left mouse button by selecting the tool button</li>
                 </ol>
-            </div>
+                <br>
+                This demo requires a HTLM5 browser, Google Chrome is recommended.
+                <br>
+                Read about the <a href="architecture.html">architecture</a> for this demo
+             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -211,8 +207,9 @@
             // resize the parent div of the viewport to fit the screen
             var imageViewer = $(studyViewer).find('.imageViewer')[0];
             var viewportWrapper = $(imageViewer).find('.viewportWrapper')[0];
-            viewportWrapper.style.width = window.innerWidth - 400+ "px";
-            viewportWrapper.style.height= window.innerHeight - 300 + "px";
+            var parentDiv = $(studyViewer).find('.col-xs-10')[0];
+            viewportWrapper.style.width = (parentDiv.style.width - 10) + "px";
+            viewportWrapper.style.height= (window.innerHeight - 180) + "px";
 
 
             // image enable the dicomImage element and activate a few tools
