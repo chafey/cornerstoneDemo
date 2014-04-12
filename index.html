@@ -39,6 +39,8 @@
     .viewportWrapper {
 
     }
+    .renderTime {}
+
 </style>
 <body>
 <div id="wrap">
@@ -118,7 +120,8 @@
                                 <div>Zoom:</div>
                             </div>
                             <div class="overlay" style="bottom:0px; left:0px">
-                                WW/WC:
+                                <div class="renderTime">Render Time:</div>
+                                <div>WW/WC:</div>
                             </div>
 
                         </div>
@@ -225,9 +228,9 @@
             $(topRight[1]).text(data.studyDate);
             var bottomLeft = $(childDivs[2]).find('div');
             $(bottomLeft[1]).text("# Images: " + stacks[0].imageIds.length);
-
+            var bottomRight = $(childDivs[3]).find('div');
             function onViewportUpdated(e) {
-                $(childDivs[3]).text("WW/WL:" + Math.round(e.detail.viewport.windowWidth) + "/" + Math.round(e.detail.viewport.windowCenter));
+                $(bottomRight[0]).text("WW/WL:" + Math.round(e.detail.viewport.windowWidth) + "/" + Math.round(e.detail.viewport.windowCenter));
                 $(bottomLeft[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
             };
             element.addEventListener("CornerstoneViewportUpdated", onViewportUpdated, false);
@@ -240,6 +243,12 @@
                 $(bottomLeft[1]).text("Image #" + (stack.currentImageIdIndex + 1) + "/" + stack.imageIds.length);
             }
             element.addEventListener("CornerstoneNewImage", onNewImage, false);
+
+            function onImageRendered(e) {
+                $(bottomRight[1]).text("Render Time:" + cornerstone.lastRenderTimeInMs + " ms");
+            }
+            element.addEventListener("CornerstoneImageRendered", onImageRendered, false);
+
 
             var imageId = stacks[0].imageIds[0];
 
