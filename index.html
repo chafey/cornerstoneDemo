@@ -328,9 +328,10 @@
                     // make this series visible
                     cornerstoneTools.stackScroll.disable(element);
                     cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
-                    cornerstone.newStack(element, stacks[stack.seriesIndex].imageIds[0]);
+                    cornerstone.showImage(element, stacks[stack.seriesIndex].imageIds[0]);
                     var stackState = cornerstoneTools.getToolState(element, 'stack');
                     stackState.data[0] = stacks[stack.seriesIndex];
+                    stackState.data[0].currentImageIdIndex = 0;
                     cornerstoneTools.stackPrefetch.enable(element);
                     $(bottomLeft[1]).text("# Images: " + stacks[stack.seriesIndex].imageIds.length);
                 });
