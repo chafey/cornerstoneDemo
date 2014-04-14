@@ -35,6 +35,24 @@
             "studyDescription" :"CHEST",
             "numImages" : 2,
             "studyId" : "dxstudy"
+        },
+        {
+            "patientName" : "MS^MG",
+            "patientId" : "1346269",
+            "studyDate" : "20010109",
+            "modality" : "MG",
+            "studyDescription" :"MAMMOGRAM",
+            "numImages" : 8,
+            "studyId" : "mgstudy"
+        },
+        {
+            "patientName": "Patient^Anonymous",
+            "patientId": "12345678",
+            "studyDate": "20100510",
+            "modality": "PTCT",
+            "studyDescription": "Neck^HeadNeckPETCT",
+            "numImages": 261,
+            "studyId": "ptctstudy"
         }
     ]
 }
