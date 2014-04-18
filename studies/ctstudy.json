@@ -8,22 +8,6 @@
     "studyId" : "ctstudy",
     "seriesList" : [
         {
-            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.887",
-            "seriesDescription": "SCOUT PA",
-            "seriesNumber" : "1",
-            "instanceList" : [
-                {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668949.888.dcm"}
-            ]
-        },
-        {
-            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.887",
-            "seriesDescription": "SCOUT LAT",
-            "seriesNumber" : "1.1",
-            "instanceList" : [
-                {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668949.889.dcm"}
-            ]
-        },
-        {
             "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.890",
             "seriesDescription": "HELICAL CHEST",
             "seriesNumber" : "2",
@@ -137,6 +121,30 @@
                 {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668950.215.dcm"},
                 {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668950.216.dcm"},
                 {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668950.217.dcm"}
+            ]
+        },
+        {
+            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.887",
+            "seriesDescription": "SCOUT PA",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668949.888.dcm"}
+            ]
+        },
+        {
+            "seriesUid" : "1.2.840.113619.2.30.1.1762295590.1623.978668949.887",
+            "seriesDescription": "SCOUT LAT",
+            "seriesNumber" : "1.1",
+            "instanceList" : [
+                {"imageId": "CTStudy/1.2.840.113619.2.30.1.1762295590.1623.978668949.889.dcm"}
+            ]
+        },
+        {
+            "seriesUid" : "5",
+            "seriesDescription": "PATHOLOGY",
+            "seriesNumber" : "5",
+            "instanceList" : [
+                {"imageId": "http://upload.wikimedia.org/wikipedia/commons/7/7d/Renal_Cell_Carcinoma.jpg"}
             ]
         }
     ]

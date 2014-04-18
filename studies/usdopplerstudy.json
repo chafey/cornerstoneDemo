@@ -1,0 +1,87 @@
+{
+    "patientName" : "US Echo",
+    "patientId" : "",
+    "studyDate" : "20120418",
+    "modality" : "US",
+    "studyDescription" :"US Dopler",
+    "numImages" : 22,
+    "studyId" : "usdopplerstudy",
+    "seriesList" : [
+        {
+            "seriesDescription": "Image #1",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00004"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #2",
+            "seriesNumber" : "2",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00005"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #3",
+            "seriesNumber" : "3",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00006"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #4",
+            "seriesNumber" : "4",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00007"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #5 (clip)",
+            "seriesNumber" : "5",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=0"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=1"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=2"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=3"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=4"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=5"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=6"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=7"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=8"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=9"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=10"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=11"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=12"},
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=13"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #6",
+            "seriesNumber" : "6",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00009"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #7",
+            "seriesNumber" : "7",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00010"}
+            ]
+        },
+        {
+            "seriesDescription": "",
+            "seriesNumber" : "8",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00011"}
+            ]
+        },
+        {
+            "seriesDescription": "",
+            "seriesNumber" : "9",
+            "instanceList" : [
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00012"}
+            ]
+        }
+    ]
+}

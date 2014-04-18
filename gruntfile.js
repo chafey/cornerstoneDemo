@@ -19,6 +19,7 @@ module.exports = function(grunt) {
                     'bower_components/cornerstone/dist/cornerstone.min.js',
                     'bower_components/cornerstoneTools/dist/cornerstoneTools.min.js',
                     'bower_components/cornerstoneWADOImageLoader/dist/cornerstoneWADOImageLoader.min.js',
+                    'bower_components/cornerstoneWebImageLoader/dist/cornerstoneWebImageLoader.min.js',
                     'bower_components/dicomParser/dist/dicomParser.min.js'
                 ],
                 dest: '',

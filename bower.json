@@ -13,10 +13,12 @@
         ".gitignore"
     ],
     "dependencies": {
-        "dicomParser": "~0.2.0",
-        "cornerstone": "~0.1.0",
-        "cornerstoneTools": "~0.1.0",
-        "cornerstoneWADOImageLoader": "~0.1.0"
+        "dicomParser": "~0.3.0",
+        "cornerstone": "~0.3.0",
+        "cornerstoneTools": "~0.2.2",
+        "cornerstoneWADOImageLoader": "~0.2.2",
+        "cornerstoneWebImageLoader": "~0.2.0"
+
     },
     "devDependencies": {
         "qunit": "~1.14.0"

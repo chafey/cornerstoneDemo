@@ -164,6 +164,9 @@
 <!-- include the cornerstoneWADOImageLoader library -->
 <script src="cornerstoneWADOImageLoader.min.js"></script>
 
+<script src="cornerstoneWebImageLoader.min.js"></script>
+
+
 <!-- include the dicomParser library -->
 <script src="dicomParser.min.js"></script>
 
@@ -192,7 +195,10 @@
                     currentImageIdIndex: 0,
                 }
                 series.instanceList.forEach(function(image) {
-                    var imageId = "http://cornerstonetech.org/images/ClearCanvas/" + image.imageId;
+                    var imageId = image.imageId;
+                    if(image.imageId.substr(0, 4) !== 'http') {
+                        imageId = "dicomweb://cornerstonetech.org/images/ClearCanvas/" + image.imageId;
+                    }
                     stack.imageIds.push(imageId);
                 });
                 seriesIndex++;
@@ -244,98 +250,106 @@
             var imageId = stacks[0].imageIds[0];
 
             // image enable the dicomImage element
-            cornerstone.enable(element, imageId);
-            cornerstoneTools.mouseInput.enable(element);
-            cornerstoneTools.mouseWheelInput.enable(element);
+            cornerstone.enable(element);
+            cornerstone.loadImage(imageId).then(function(image) {
+                cornerstone.displayImage(element, image);
+                cornerstoneTools.mouseInput.enable(element);
+                cornerstoneTools.mouseWheelInput.enable(element);
 
-            // Enable all tools we want to use with this element
-            cornerstoneTools.wwwc.activate(element, 1); // ww/wc is the default tool for left mouse button
-            cornerstoneTools.pan.activate(element, 2); // pan is the default tool for middle mouse button
-            cornerstoneTools.zoom.activate(element, 4); // zoom is the default tool for right mouse button
-            cornerstoneTools.probe.enable(element);
-            cornerstoneTools.length.enable(element);
-            cornerstoneTools.ellipticalRoi.enable(element);
-            cornerstoneTools.rectangleRoi.enable(element);
-
-
-            // stack tools
-            cornerstoneTools.addStackStateManager(element);
-            cornerstoneTools.addToolState(element, 'stack', stacks[0]);
-            cornerstoneTools.stackScrollWheel.activate(element);
-            cornerstoneTools.stackPrefetch.enable(element);
+                // Enable all tools we want to use with this element
+                cornerstoneTools.wwwc.activate(element, 1); // ww/wc is the default tool for left mouse button
+                cornerstoneTools.pan.activate(element, 2); // pan is the default tool for middle mouse button
+                cornerstoneTools.zoom.activate(element, 4); // zoom is the default tool for right mouse button
+                cornerstoneTools.probe.enable(element);
+                cornerstoneTools.length.enable(element);
+                cornerstoneTools.ellipticalRoi.enable(element);
+                cornerstoneTools.rectangleRoi.enable(element);
 
 
-            function disableAllTools()
-            {
-                cornerstoneTools.wwwc.disable(element);
-                cornerstoneTools.pan.activate(element, 2); // 2 is middle mouse button
-                cornerstoneTools.zoom.activate(element, 4); // 4 is right mouse button
-                cornerstoneTools.probe.deactivate(element, 1);
-                cornerstoneTools.length.deactivate(element, 1);
-                cornerstoneTools.ellipticalRoi.deactivate(element, 1);
-                cornerstoneTools.rectangleRoi.deactivate(element, 1);
-                cornerstoneTools.stackScroll.deactivate(element, 1);
-            }
+                // stack tools
+                cornerstoneTools.addStackStateManager(element);
+                cornerstoneTools.addToolState(element, 'stack', stacks[0]);
+                cornerstoneTools.stackScrollWheel.activate(element);
+                cornerstoneTools.stackPrefetch.enable(element);
 
-            var buttons = $(studyViewer).find('button');
-            // Tool button event handlers that set the new active tool
-            $(buttons[0]).click(function() {
-                disableAllTools();
-                cornerstoneTools.wwwc.activate(element, 1);
-            });
-            $(buttons[1]).click(function() {
-                disableAllTools();
-                cornerstoneTools.zoom.activate(element, 5); // 5 is right mouse button and left mouse button
-            });
-            $(buttons[2]).click(function() {
-                disableAllTools();
-                cornerstoneTools.pan.activate(element, 3); // 3 is middle mouse button and left mouse button
-            });
-            $(buttons[3]).click(function() {
-                disableAllTools();
-                cornerstoneTools.stackScroll.activate(element, 1);
-            });
-            $(buttons[4]).click(function() {
-                disableAllTools();
-                cornerstoneTools.length.activate(element, 1);
-            });
-            $(buttons[5]).click(function() {
-                disableAllTools();
-                cornerstoneTools.probe.activate(element, 1);
-            });
-            $(buttons[6]).click(function() {
-                disableAllTools();
-                cornerstoneTools.ellipticalRoi.activate(element, 1);
-            });
-            $(buttons[7]).click(function() {
-                disableAllTools();
-                cornerstoneTools.rectangleRoi.activate(element, 1);
-            });
-            $(buttons[0]).tooltip();
-            $(buttons[1]).tooltip();
-            $(buttons[2]).tooltip();
-            $(buttons[3]).tooltip();
-            $(buttons[4]).tooltip();
-            $(buttons[5]).tooltip();
-            $(buttons[6]).tooltip();
-            $(buttons[7]).tooltip();
 
-            var seriesList = $(studyViewer).find('.list-group')[0];
-            stacks.forEach(function(stack) {
-                var seriesEntry = '<a class="list-group-item">' + stack.seriesDescription + '</a>';
-                var seriesElement = $(seriesEntry).appendTo(seriesList);
-                $(seriesElement).click(function () {
-                    // make this series visible
-                    cornerstoneTools.stackScroll.disable(element);
-                    cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
-                    cornerstone.showImage(element, stacks[stack.seriesIndex].imageIds[0]);
-                    var stackState = cornerstoneTools.getToolState(element, 'stack');
-                    stackState.data[0] = stacks[stack.seriesIndex];
-                    stackState.data[0].currentImageIdIndex = 0;
-                    cornerstoneTools.stackPrefetch.enable(element);
-                    $(bottomLeft[1]).text("# Images: " + stacks[stack.seriesIndex].imageIds.length);
+                function disableAllTools()
+                {
+                    cornerstoneTools.wwwc.disable(element);
+                    cornerstoneTools.pan.activate(element, 2); // 2 is middle mouse button
+                    cornerstoneTools.zoom.activate(element, 4); // 4 is right mouse button
+                    cornerstoneTools.probe.deactivate(element, 1);
+                    cornerstoneTools.length.deactivate(element, 1);
+                    cornerstoneTools.ellipticalRoi.deactivate(element, 1);
+                    cornerstoneTools.rectangleRoi.deactivate(element, 1);
+                    cornerstoneTools.stackScroll.deactivate(element, 1);
+                }
+
+                var buttons = $(studyViewer).find('button');
+                // Tool button event handlers that set the new active tool
+                $(buttons[0]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.wwwc.activate(element, 1);
+                });
+                $(buttons[1]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.zoom.activate(element, 5); // 5 is right mouse button and left mouse button
+                });
+                $(buttons[2]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.pan.activate(element, 3); // 3 is middle mouse button and left mouse button
+                });
+                $(buttons[3]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.stackScroll.activate(element, 1);
+                });
+                $(buttons[4]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.length.activate(element, 1);
+                });
+                $(buttons[5]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.probe.activate(element, 1);
+                });
+                $(buttons[6]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.ellipticalRoi.activate(element, 1);
+                });
+                $(buttons[7]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.rectangleRoi.activate(element, 1);
+                });
+                $(buttons[0]).tooltip();
+                $(buttons[1]).tooltip();
+                $(buttons[2]).tooltip();
+                $(buttons[3]).tooltip();
+                $(buttons[4]).tooltip();
+                $(buttons[5]).tooltip();
+                $(buttons[6]).tooltip();
+                $(buttons[7]).tooltip();
+
+                var seriesList = $(studyViewer).find('.list-group')[0];
+                stacks.forEach(function(stack) {
+                    var seriesEntry = '<a class="list-group-item">' + stack.seriesDescription + '</a>';
+                    var seriesElement = $(seriesEntry).appendTo(seriesList);
+                    $(seriesElement).click(function () {
+                        // make this series visible
+                        cornerstoneTools.stackScroll.disable(element);
+                        cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
+                        cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
+                            //var defViewport = cornerstone.getDefaultViewport(element, image);
+                            cornerstone.displayImage(element, image);
+                            cornerstone.fitToWindow(element);
+                            var stackState = cornerstoneTools.getToolState(element, 'stack');
+                            stackState.data[0] = stacks[stack.seriesIndex];
+                            stackState.data[0].currentImageIdIndex = 0;
+                            cornerstoneTools.stackPrefetch.enable(element);
+                            $(bottomLeft[1]).text("# Images: " + stacks[stack.seriesIndex].imageIds.length);
+                        });
+                    });
                 });
             });
+
         });
     }
 

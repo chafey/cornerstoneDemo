@@ -53,6 +53,24 @@
             "studyDescription": "Neck^HeadNeckPETCT",
             "numImages": 261,
             "studyId": "ptctstudy"
+        },
+        {
+            "patientName" : "US Echo",
+            "patientId" : "",
+            "studyDate" : "20120418",
+            "modality" : "US",
+            "studyDescription" :"US Dopler",
+            "numImages" : 22,
+            "studyId" : "usdopplerstudy"
+        },
+        {
+            "patientName" : "Dermatology",
+            "patientId" : "9227465",
+            "studyDate" : "20010109",
+            "modality" : "DERM",
+            "studyDescription" :"Skin Rash",
+            "numImages" : 2,
+            "studyId" : "dermatology"
         }
     ]
 }
