@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link href="http://bootswatch.com/cyborg/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="cornerstone.min.css" rel="stylesheet">
 </head>
 <style>
@@ -27,16 +27,71 @@
     .imageViewer {
     }
 
+    .myNav {
+        margin: 0;
+        border:0;
+    }
+
     .viewportWrapper {
 
     }
     .renderTime {}
     .fps {}
 
+    .thumbnail {
+        color: white;
+        background-color:black;
+        width:128px;
+        height:128px;
+        border: 0px;
+        padding: 0px;
+    }
+
+    .viewer {
+        position: absolute;
+        left: 170px;
+    }
+
+    .thumbnailSelector {
+        width:170px;
+        float:left;
+        margin-left:0px;
+    }
+    body, html {height:100%}
+
+    #wrap {height:100%}
+
+    .studyContainer {
+        margin-left:0px;
+        margin-right:0px;
+        padding: 0px;
+    }
+    .container {
+    }
+
+    .thumbnails {
+        margin:0;
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+    .studyRow {
+        margin-left: 0px;
+        margin-rigth: 0px;
+        height:100%;
+    }
+    .row {
+        margin:0;
+    }
+
+    .list-group-item {
+        background-color: black;
+        padding: 2;
+    }
+
 </style>
 <body>
 <div id="wrap">
-    <nav class="navbar navbar-default" rol="navigation">
+    <nav class="myNav navbar navbar-default" rol="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="https://github.com/chafey/cornerstone">Cornerstone</a>
@@ -47,15 +102,15 @@
 
         </div>
     </nav>
-    <div">
-        <ul id="tabs" class="nav nav-tabs">
+    <div class='main'>
+        <ul id="tabs" class="nav nav-tabs" >
             <li class="active"><a href="#studyList" data-toggle="tab">Study List</a></li>
         </ul>
 
-        <div id="tabContent" class="tab-content" style="height:100%">
+        <div id="tabContent" class="tab-content">
             <div id="studyList" class="tab-pane active">
                 <div class="row">
-                    <table style="margin-left:10px" class="col-md-12 table table-striped">
+                    <table  class="col-md-12 table table-striped">
                         <thead>
                         <tr>
                             <th>Patient Name</th>
@@ -74,56 +129,57 @@
             </div>
         </div>
 
-        <div id="studyViewerTemplate" class="tab-pane active hidden">
-            <div class="row">
-                <div class="col-xs-2">
-                    <h4>Select Series</h4>
-                    <div class="list-group">
+        <div id="studyViewerTemplate" class="tab-pane active hidden" style="height:100%">
+            <div class="studyContainer" style="height:100%">
+                <div class="studyRow row" style="height:100%">
+                    <div class="thumbnailSelector">
+                        <h4 class="text-center" style="height:20px;">Select Series</h4>
+                        <div class="thumbnails list-group">
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-10">
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="fa fa-adjust"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="fa fa-search"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="fa fa-arrows"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="fa fa-bars"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Play Clip"><span class="fa fa-play"></span></button>
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stop Clip"><span class="fa fa-stop"></span></button>
-                    <div class="imageViewer">
-                        <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
-                             oncontextmenu="return false"
-                             class='cornerstone-enabled-image'
-                             unselectable='on'
-                             onselectstart='return false;'
-                             onmousedown='return false;'>
-                            <div class="viewport">
-                            </div>
-                            <div class="overlay" style="top:0px; left:0px">
-                                <div>Patient Name</div>
-                                <div>Patient Id</div>
-                            </div>
-                            <div class="overlay" style="top:0px; right:0px">
-                                <div>Study Description</div>
-                                <div>Study Date</div>
-                            </div>
+                    <div class="viewer">
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="fa fa-adjust"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="fa fa-search"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="fa fa-arrows"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Play Clip"><span class="fa fa-play"></span></button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                        <div class="imageViewer">
+                            <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
+                                 oncontextmenu="return false"
+                                 class='cornerstone-enabled-image'
+                                 unselectable='on'
+                                 onselectstart='return false;'
+                                 onmousedown='return false;'>
+                                <div class="viewport">
+                                </div>
+                                <div class="overlay" style="top:0px; left:0px">
+                                    <div>Patient Name</div>
+                                    <div>Patient Id</div>
+                                </div>
+                                <div class="overlay" style="top:0px; right:0px">
+                                    <div>Study Description</div>
+                                    <div>Study Date</div>
+                                </div>
 
-                            <div class="overlay" style="bottom:0px; left:0px">
-                                <div class="fps">FPS:</div>
-                                <div class="renderTime">Render Time:</div>
-                                <div class="currentImageAndTotalImages">Image #:</div>
-                            </div>
-                            <div class="overlay" style="bottom:0px; right:0px">
-                                <div>Zoom:</div>
-                                <div>WW/WC:</div>
+                                <div class="overlay" style="bottom:0px; left:0px">
+                                    <div class="fps">FPS:</div>
+                                    <div class="renderTime">Render Time:</div>
+                                    <div class="currentImageAndTotalImages">Image #:</div>
+                                </div>
+                                <div class="overlay" style="bottom:0px; right:0px">
+                                    <div>Zoom:</div>
+                                    <div>WW/WC:</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
+             </div>
         </div>
     </div>
 </div>
@@ -155,9 +211,9 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="jquery-2.1.0.min.js"></script>
 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" ></script>
+<script src="bootstrap.min.js" ></script>
 
 <!-- include the cornerstone library -->
 <script src="cornerstone.min.js"></script>
@@ -212,10 +268,15 @@
             // resize the parent div of the viewport to fit the screen
             var imageViewer = $(studyViewer).find('.imageViewer')[0];
             var viewportWrapper = $(imageViewer).find('.viewportWrapper')[0];
-            var parentDiv = $(studyViewer).find('.col-xs-10')[0];
+            var parentDiv = $(studyViewer).find('.viewer')[0];
             viewportWrapper.style.width = (parentDiv.style.width - 10) + "px";
-            viewportWrapper.style.height= (window.innerHeight - 180) + "px";
+            viewportWrapper.style.height= (window.innerHeight - 150) + "px";
 
+            var studyRow = $(studyViewer).find('.studyRow')[0];
+            var width = $(studyRow).width();
+            $(parentDiv).width(width - 170);
+            viewportWrapper.style.width = (parentDiv.style.width - 10) + "px";
+            viewportWrapper.style.height= (window.innerHeight - 150) + "px";
 
             // image enable the dicomImage element and activate a few tools
             var element = $(studyViewer).find('.viewport')[0];
@@ -343,18 +404,29 @@
                 $(buttons[6]).tooltip();
                 $(buttons[7]).tooltip();
 
-                var seriesList = $(studyViewer).find('.list-group')[0];
+                var seriesList = $(studyViewer).find('.thumbnails')[0];
                 stacks.forEach(function(stack) {
-                    var seriesEntry = '<a class="list-group-item">' + stack.seriesDescription + '</a>';
+                    var seriesEntry = '<a class="list-group-item">' +
+                            '<div class="thumbnail"' +
+                            'oncontextmenu="return false"' +
+                            'unselectable="on"' +
+                            'onselectstart="return false;"' +
+                            'onmousedown="return false;"></div>' +
+                            "<div class='text-center'>" + stack.seriesDescription + '</div></a>';
                     var seriesElement = $(seriesEntry).appendTo(seriesList);
+                    var thumbnail = $(seriesElement).find('div')[0];
+                    cornerstone.enable(thumbnail);
+                    cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
+                        cornerstone.displayImage(thumbnail, image);
+                    });
                     $(seriesElement).click(function () {
                         // make this series visible
                         cornerstoneTools.stackScroll.disable(element);
                         cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
                         cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
-                            //var defViewport = cornerstone.getDefaultViewport(element, image);
+                            var defViewport = cornerstone.getDefaultViewport(element, image);
                             currentStackIndex = stack.seriesIndex;
-                            cornerstone.displayImage(element, image);
+                            cornerstone.displayImage(element, image, defViewport);
                             cornerstone.fitToWindow(element);
                             var stackState = cornerstoneTools.getToolState(element, 'stack');
                             stackState.data[0] = stacks[stack.seriesIndex];
@@ -363,11 +435,41 @@
                             $(bottomLeft[1]).text("# Images: " + stacks[stack.seriesIndex].imageIds.length);
                         });
                     });
+
+
                 });
+
+                function resizeStudyViewer() {
+                    var studyRow = $(studyViewer).find('.studyRow')[0];
+                    var height = $(studyRow).height();
+                    var width = $(studyRow).width();
+                    $(seriesList).height(height - 40);
+                    $(parentDiv).width(width - 170);
+                    viewportWrapper.style.width = (parentDiv.style.width - 10) + "px";
+                    viewportWrapper.style.height= (window.innerHeight - 150) + "px";
+                    cornerstone.resize(element, true);
+                }
+
+                $(window).resize(function() {
+                    resizeStudyViewer();
+                });
+                resizeStudyViewer();
+
             });
 
         });
     }
+
+    function resizeMain() {
+        var height = $(window).height();
+        $('#main').height(height - 50);
+        $('#tabContent').height(height - 50 -42);
+    }
+
+    $(window).resize(function() {
+        resizeMain();
+    });
+    resizeMain();
 
 
     $.getJSON('studyList.json', function(data)
