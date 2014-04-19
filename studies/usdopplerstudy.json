@@ -70,14 +70,14 @@
             ]
         },
         {
-            "seriesDescription": "",
+            "seriesDescription": "Image #8",
             "seriesNumber" : "8",
             "instanceList" : [
                 {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00011"}
             ]
         },
         {
-            "seriesDescription": "",
+            "seriesDescription": "Image #9",
             "seriesNumber" : "9",
             "instanceList" : [
                 {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00012"}

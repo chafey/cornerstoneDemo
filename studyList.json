@@ -71,6 +71,15 @@
             "studyDescription" :"Skin Rash",
             "numImages" : 2,
             "studyId" : "dermatology"
+        },
+        {
+            "patientName" : "US JPEG",
+            "patientId" : "123454321",
+            "studyDate" : "20120418",
+            "modality" : "US",
+            "studyDescription" :"US FETAL SURVEY",
+            "numImages" : 22,
+            "studyId" : "usjpeg"
         }
     ]
 }

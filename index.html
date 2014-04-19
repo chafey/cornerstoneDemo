@@ -31,6 +31,7 @@
 
     }
     .renderTime {}
+    .fps {}
 
 </style>
 <body>
@@ -89,6 +90,8 @@
                     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
                     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
                     <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Play Clip"><span class="fa fa-play"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stop Clip"><span class="fa fa-stop"></span></button>
                     <div class="imageViewer">
                         <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
                              oncontextmenu="return false"
@@ -106,15 +109,16 @@
                                 <div>Study Description</div>
                                 <div>Study Date</div>
                             </div>
-                            <div class="overlay" style="bottom:0px; right:0px">
-                                <div class="currentImageAndTotalImages">Image #:</div>
-                                <div>Zoom:</div>
-                            </div>
+
                             <div class="overlay" style="bottom:0px; left:0px">
+                                <div class="fps">FPS:</div>
                                 <div class="renderTime">Render Time:</div>
+                                <div class="currentImageAndTotalImages">Image #:</div>
+                            </div>
+                            <div class="overlay" style="bottom:0px; right:0px">
+                                <div>Zoom:</div>
                                 <div>WW/WC:</div>
                             </div>
-
                         </div>
                     </div>
 
@@ -184,7 +188,7 @@
             $('#wadoURL').val();
 
             var stacks = [];
-
+            var currentStackIndex = 0;
             var seriesIndex = 0;
             data.seriesList.forEach(function(series) {
                 var stack = {
@@ -224,30 +228,35 @@
             $(topRight[0]).text(data.studyDescription);
             $(topRight[1]).text(data.studyDate);
             var bottomLeft = $(childDivs[2]).find('div');
-            $(bottomLeft[1]).text("# Images: " + stacks[0].imageIds.length);
             var bottomRight = $(childDivs[3]).find('div');
             function onViewportUpdated(e) {
-                $(bottomRight[0]).text("WW/WL:" + Math.round(e.detail.viewport.voi.windowWidth) + "/" + Math.round(e.detail.viewport.voi.windowCenter));
-                $(bottomLeft[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
+                $(bottomRight[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
+                $(bottomRight[1]).text("WW/WL:" + Math.round(e.detail.viewport.voi.windowWidth) + "/" + Math.round(e.detail.viewport.voi.windowCenter));
             };
             element.addEventListener("CornerstoneViewportUpdated", onViewportUpdated, false);
             function onNewImage(e) {
-                var stackData = cornerstoneTools.getToolState(element, 'stack');
-                if(stackData === undefined || stackData.data === undefined || stackData.data.length === 0) {
-                    return;
+                // if we are currently playing a clip then update the FPS
+                var playClipToolData = cornerstoneTools.getToolState(element, 'playClip');
+                if(playClipToolData !== undefined && playClipToolData.data[0].intervalId !== undefined && e.detail.frameRate !== undefined) {
+                    $(bottomLeft[0]).text("FPS: " + Math.round(e.detail.frameRate));
+                    //console.log('frameRate: ' + e.detail.frameRate);
+                } else {
+                    if($(bottomLeft[0]).text().length > 0) {
+                        $(bottomLeft[0]).text("");
+                    }
                 }
-                var stack = stackData.data[0];
-                $(bottomLeft[1]).text("Image #" + (stack.currentImageIdIndex + 1) + "/" + stack.imageIds.length);
+                $(bottomLeft[2]).text("Image #" + (stacks[currentStackIndex].currentImageIdIndex + 1) + "/" + stacks[currentStackIndex].imageIds.length);
             }
             element.addEventListener("CornerstoneNewImage", onNewImage, false);
 
             function onImageRendered(e) {
-                $(bottomRight[1]).text("Render Time:" + cornerstone.lastRenderTimeInMs + " ms");
+
+                $(bottomLeft[1]).text("Render Time:" + e.detail.renderTimeInMs + " ms");
             }
             element.addEventListener("CornerstoneImageRendered", onImageRendered, false);
 
 
-            var imageId = stacks[0].imageIds[0];
+            var imageId = stacks[currentStackIndex].imageIds[0];
 
             // image enable the dicomImage element
             cornerstone.enable(element);
@@ -267,7 +276,7 @@
 
 
                 // stack tools
-                cornerstoneTools.addStackStateManager(element);
+                cornerstoneTools.addStackStateManager(element, ['playClip']);
                 cornerstoneTools.addToolState(element, 'stack', stacks[0]);
                 cornerstoneTools.stackScrollWheel.activate(element);
                 cornerstoneTools.stackPrefetch.enable(element);
@@ -319,6 +328,12 @@
                     disableAllTools();
                     cornerstoneTools.rectangleRoi.activate(element, 1);
                 });
+                $(buttons[8]).click(function() {
+                    cornerstoneTools.playClip(element, 31);
+                });
+                $(buttons[9]).click(function() {
+                    cornerstoneTools.stopClip(element);
+                });
                 $(buttons[0]).tooltip();
                 $(buttons[1]).tooltip();
                 $(buttons[2]).tooltip();
@@ -338,6 +353,7 @@
                         cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
                         cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
                             //var defViewport = cornerstone.getDefaultViewport(element, image);
+                            currentStackIndex = stack.seriesIndex;
                             cornerstone.displayImage(element, image);
                             cornerstone.fitToWindow(element);
                             var stackState = cornerstoneTools.getToolState(element, 'stack');
