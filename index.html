@@ -237,7 +237,7 @@
             function onNewImage(e) {
                 // if we are currently playing a clip then update the FPS
                 var playClipToolData = cornerstoneTools.getToolState(element, 'playClip');
-                if(playClipToolData !== undefined && playClipToolData.data[0].intervalId !== undefined && e.detail.frameRate !== undefined) {
+                if(playClipToolData !== undefined && playClipToolData.data.length > 0 && playClipToolData.data[0].intervalId !== undefined && e.detail.frameRate !== undefined) {
                     $(bottomLeft[0]).text("FPS: " + Math.round(e.detail.frameRate));
                     //console.log('frameRate: ' + e.detail.frameRate);
                 } else {
