@@ -38,7 +38,7 @@
     .renderTime {}
     .fps {}
 
-    .thumbnail {
+    .csthumbnail {
         color: white;
         background-color:black;
         width:128px;
@@ -49,11 +49,11 @@
 
     .viewer {
         position: absolute;
-        left: 170px;
+        left: 150px;
     }
 
     .thumbnailSelector {
-        width:170px;
+        width:150px;
         float:left;
         margin-left:0px;
     }
@@ -70,7 +70,8 @@
     }
 
     .thumbnails {
-        margin:0;
+        margin:0px;
+        margin-bottom: 0px;
         overflow-y:auto;
         overflow-x:hidden;
     }
@@ -83,9 +84,17 @@
         margin:0;
     }
 
-    .list-group-item {
+    a.list-group-item {
         background-color: black;
-        padding: 2;
+        padding: 2px;
+    }
+    a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+        background-color: #999999;
+        border-color: #999999;
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+        background-color: #999999;
+        border-color: #999999;
     }
 
 </style>
@@ -138,16 +147,18 @@
                         </div>
                     </div>
                     <div class="viewer">
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="WW/WC"><span class="fa fa-adjust"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Zoom"><span class="fa fa-search"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pan"><span class="fa fa-arrows"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stack Scroll"><span class="fa fa-bars"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Play Clip"><span class="fa fa-play"></span></button>
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                        <div class="text-center" >
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="WW/WC"><span class="fa fa-adjust"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                        </div>
                         <div class="imageViewer">
                             <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
                                  oncontextmenu="return false"
@@ -403,11 +414,17 @@
                 $(buttons[5]).tooltip();
                 $(buttons[6]).tooltip();
                 $(buttons[7]).tooltip();
+                $(buttons[8]).tooltip();
+                $(buttons[9]).tooltip();
 
                 var seriesList = $(studyViewer).find('.thumbnails')[0];
                 stacks.forEach(function(stack) {
-                    var seriesEntry = '<a class="list-group-item">' +
-                            '<div class="thumbnail"' +
+                    var seriesEntry = '<a class="list-group-item" + ' +
+                            'oncontextmenu="return false"' +
+                        'unselectable="on"' +
+                        'onselectstart="return false;"' +
+                        'onmousedown="return false;">' +
+                                '<div class="csthumbnail"' +
                             'oncontextmenu="return false"' +
                             'unselectable="on"' +
                             'onselectstart="return false;"' +
@@ -417,10 +434,18 @@
                     var thumbnail = $(seriesElement).find('div')[0];
                     cornerstone.enable(thumbnail);
                     cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
+                        if(stack.seriesIndex === 0) {
+                            $(seriesElement).addClass('active');
+                        }
                         cornerstone.displayImage(thumbnail, image);
                     });
                     $(seriesElement).click(function () {
                         // make this series visible
+                        var activeThumbnails = $(seriesList).find('a').each(function() {
+                            $(this).removeClass('active');
+                        });
+                        $(seriesElement).addClass('active');
+
                         cornerstoneTools.stackScroll.disable(element);
                         cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
                         cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
