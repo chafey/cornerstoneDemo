@@ -148,7 +148,8 @@
                     </div>
                     <div class="viewer">
                         <div class="text-center" >
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="WW/WC"><span class="fa fa-adjust"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="WW/WC"><span class="fa fa-sun-o"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
@@ -390,33 +391,44 @@
                 });
                 $(buttons[1]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.zoom.activate(element, 5); // 5 is right mouse button and left mouse button
+                    var viewport = cornerstone.getViewport(element);
+                    if(viewport.invert === true) {
+                        viewport.invert = false;
+                    }
+                    else {
+                        viewport.invert = true;
+                    }
+                    cornerstone.setViewport(element, viewport);
                 });
                 $(buttons[2]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.pan.activate(element, 3); // 3 is middle mouse button and left mouse button
+                    cornerstoneTools.zoom.activate(element, 5); // 5 is right mouse button and left mouse button
                 });
                 $(buttons[3]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.stackScroll.activate(element, 1);
+                    cornerstoneTools.pan.activate(element, 3); // 3 is middle mouse button and left mouse button
                 });
                 $(buttons[4]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.length.activate(element, 1);
+                    cornerstoneTools.stackScroll.activate(element, 1);
                 });
                 $(buttons[5]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.probe.activate(element, 1);
+                    cornerstoneTools.length.activate(element, 1);
                 });
                 $(buttons[6]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.ellipticalRoi.activate(element, 1);
+                    cornerstoneTools.probe.activate(element, 1);
                 });
                 $(buttons[7]).click(function() {
                     disableAllTools();
-                    cornerstoneTools.rectangleRoi.activate(element, 1);
+                    cornerstoneTools.ellipticalRoi.activate(element, 1);
                 });
                 $(buttons[8]).click(function() {
+                    disableAllTools();
+                    cornerstoneTools.rectangleRoi.activate(element, 1);
+                });
+                $(buttons[9]).click(function() {
                     var frameRate = stacks[currentStackIndex].frameRate;
                     if(frameRate === undefined) {
                         frameRate = 10;
