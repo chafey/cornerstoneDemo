@@ -38,21 +38,10 @@
         {
             "seriesDescription": "Image #5 (clip)",
             "seriesNumber" : "5",
+            "numberOfFrames" : 13,
+            "frameRate" : 10,
             "instanceList" : [
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=0"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=1"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=2"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=3"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=4"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=5"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=6"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=7"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=8"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=9"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=10"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=11"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=12"},
-                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008?frame=13"}
+                {"imageId" : "USDoppler/DICOM/ST00001/SE00001/IM00008"}
             ]
         },
         {
