@@ -573,6 +573,8 @@
         $("#myModal").modal();
     });
 
+    // prevent scrolling on ios
+    document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 
 
 </script>
