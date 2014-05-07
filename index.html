@@ -110,6 +110,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a id="help" href="#" class="button">Help</a></li>
+                <li><a id="about" href="#" class="button">About</a></li>
             </ul>
 
         </div>
@@ -199,12 +200,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+                <h4 class="modal-title" id="myModalLabel">Help</h4>
             </div>
             <div class="modal-body">
                 <ol>
@@ -216,8 +217,36 @@
                 <br>
                 This demo requires a HTLM5 browser, Google Chrome is recommended.
                 <br>
-                Read about the <a href="architecture.html">architecture</a> for this demo
              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">About</h4>
+            </div>
+            <div class="modal-body">
+                <br>
+                This demo is based on the Cornerstone open soruce project.  All 2D image rendering is done on the client side
+                side using HTML5 and JavaScript.  DICOM P10 Instances are retrieved via WADO, parsed and displayed by the viewer -
+                the server side performs no processing.
+                <br>
+                <br>
+                <a href="https://github.com/chafey/cornerstone" target="_blank">Click here to learn more about cornerstone</a>
+                <br>
+                <br>
+                <a href="architecture.html" target="_blank">Click here to read about the architecture</a>
+                <br>
+                <br>
+                Hosting of demo images provided by <a href="http://www.lury.net" target="_blank">Lury</a>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -233,6 +262,9 @@
 <!-- include the cornerstone library -->
 <script src="cornerstone.min.js"></script>
 
+<!-- include the cornerstone library -->
+<script src="cornerstoneMath.min.js"></script>
+
 <!-- include the cornerstone tools library -->
 <script src="cornerstoneTools.min.js"></script>
 
@@ -240,7 +272,6 @@
 <script src="cornerstoneWADOImageLoader.min.js"></script>
 
 <script src="cornerstoneWebImageLoader.min.js"></script>
-
 
 <!-- include the dicomParser library -->
 <script src="dicomParser.min.js"></script>
@@ -349,11 +380,15 @@
 
             // image enable the dicomImage element
             cornerstone.enable(element);
-            cornerstone.loadImage(imageId).then(function(image) {
+            cornerstone.loadAndCacheImage(imageId).then(function(image) {
                 cornerstone.displayImage(element, image);
                 if(stacks[0].frameRate !== undefined) {
                     cornerstone.playClip(element, stacks[0].frameRate);
                 }
+                $(window).resize(function() {
+                    cornerstone.resize(element);
+                });
+
                 cornerstoneTools.mouseInput.enable(element);
                 cornerstoneTools.mouseWheelInput.enable(element);
 
@@ -438,7 +473,7 @@
                     }
                     cornerstoneTools.playClip(element, 31);
                 });
-                $(buttons[9]).click(function() {
+                $(buttons[10]).click(function() {
                     cornerstoneTools.stopClip(element);
                 });
                 $(buttons[0]).tooltip();
@@ -468,7 +503,7 @@
                     var seriesElement = $(seriesEntry).appendTo(seriesList);
                     var thumbnail = $(seriesElement).find('div')[0];
                     cornerstone.enable(thumbnail);
-                    cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
+                    cornerstone.loadAndCacheImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
                         if(stack.seriesIndex === 0) {
                             $(seriesElement).addClass('active');
                         }
@@ -485,7 +520,7 @@
                         cornerstoneTools.stopClip(element);
                         cornerstoneTools.stackScroll.disable(element);
                         cornerstoneTools.stackScroll.enable(element, stacks[stack.seriesIndex], 0);
-                        cornerstone.loadImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
+                        cornerstone.loadAndCacheImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
                             var defViewport = cornerstone.getDefaultViewport(element, image);
                             currentStackIndex = stack.seriesIndex;
                             cornerstone.displayImage(element, image, defViewport);
@@ -571,8 +606,13 @@
     });
 
     $("#help").click(function() {
-        $("#myModal").modal();
+        $("#helpModal").modal();
     });
+
+    $("#about").click(function() {
+        $("#aboutModal").modal();
+    });
+
 
     // prevent scrolling on ios
     //document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
