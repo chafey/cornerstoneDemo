@@ -158,7 +158,7 @@
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixle Probe"><span class="fa fa-dot-circle-o"></span></button>
+                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle-o"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
                             <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
@@ -257,6 +257,9 @@
 
 <script src="jquery-2.1.0.min.js"></script>
 
+<!-- include the hammer.js library for touch gestures-->
+<script src="jquery.hammer-full.js"></script>
+
 <script src="bootstrap.min.js" ></script>
 
 <!-- include the cornerstone library -->
@@ -349,11 +352,7 @@
             $(topRight[1]).text(data.studyDate);
             var bottomLeft = $(childDivs[2]).find('div');
             var bottomRight = $(childDivs[3]).find('div');
-            function onViewportUpdated(e) {
-                $(bottomRight[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
-                $(bottomRight[1]).text("WW/WL:" + Math.round(e.detail.viewport.voi.windowWidth) + "/" + Math.round(e.detail.viewport.voi.windowCenter));
-            };
-            element.addEventListener("CornerstoneViewportUpdated", onViewportUpdated, false);
+
             function onNewImage(e) {
                 // if we are currently playing a clip then update the FPS
                 var playClipToolData = cornerstoneTools.getToolState(element, 'playClip');
@@ -370,7 +369,8 @@
             element.addEventListener("CornerstoneNewImage", onNewImage, false);
 
             function onImageRendered(e) {
-
+                $(bottomRight[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
+                $(bottomRight[1]).text("WW/WL:" + Math.round(e.detail.viewport.voi.windowWidth) + "/" + Math.round(e.detail.viewport.voi.windowCenter));
                 $(bottomLeft[1]).text("Render Time:" + e.detail.renderTimeInMs + " ms");
             }
             element.addEventListener("CornerstoneImageRendered", onImageRendered, false);
@@ -380,17 +380,15 @@
 
             // image enable the dicomImage element
             cornerstone.enable(element);
-            cornerstone.loadAndCacheImage(imageId).then(function(image) {
+                        cornerstone.loadAndCacheImage(imageId).then(function(image) {
                 cornerstone.displayImage(element, image);
                 if(stacks[0].frameRate !== undefined) {
                     cornerstone.playClip(element, stacks[0].frameRate);
                 }
-                $(window).resize(function() {
-                    cornerstone.resize(element);
-                });
 
                 cornerstoneTools.mouseInput.enable(element);
                 cornerstoneTools.mouseWheelInput.enable(element);
+                cornerstoneTools.touchInput.enable(element);
 
                 // Enable all tools we want to use with this element
                 cornerstoneTools.wwwc.activate(element, 1); // ww/wc is the default tool for left mouse button
@@ -400,6 +398,8 @@
                 cornerstoneTools.length.enable(element);
                 cornerstoneTools.ellipticalRoi.enable(element);
                 cornerstoneTools.rectangleRoi.enable(element);
+                cornerstoneTools.wwwcTouchDrag.activate(element);
+                cornerstoneTools.zoomTouchPinch.activate(element);
 
 
                 // stack tools
@@ -419,15 +419,20 @@
                     cornerstoneTools.ellipticalRoi.deactivate(element, 1);
                     cornerstoneTools.rectangleRoi.deactivate(element, 1);
                     cornerstoneTools.stackScroll.deactivate(element, 1);
+                    cornerstoneTools.wwwcTouchDrag.deactivate(element);
+                    cornerstoneTools.zoomTouchDrag.deactivate(element);
+                    cornerstoneTools.panTouchDrag.deactivate(element);
+                    cornerstoneTools.stackScrollTouchDrag.deactivate(element);
                 }
 
                 var buttons = $(studyViewer).find('button');
                 // Tool button event handlers that set the new active tool
-                $(buttons[0]).click(function() {
+                $(buttons[0]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.wwwc.activate(element, 1);
+                    cornerstoneTools.wwwcTouchDrag.deactivate(element);
                 });
-                $(buttons[1]).click(function() {
+                $(buttons[1]).on('click touchstart',function() {
                     disableAllTools();
                     var viewport = cornerstone.getViewport(element);
                     if(viewport.invert === true) {
@@ -438,42 +443,45 @@
                     }
                     cornerstone.setViewport(element, viewport);
                 });
-                $(buttons[2]).click(function() {
+                $(buttons[2]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.zoom.activate(element, 5); // 5 is right mouse button and left mouse button
+                    cornerstoneTools.zoomTouchDrag.activate(element);
                 });
-                $(buttons[3]).click(function() {
+                $(buttons[3]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.pan.activate(element, 3); // 3 is middle mouse button and left mouse button
+                    cornerstoneTools.panTouchDrag.activate(element);
                 });
-                $(buttons[4]).click(function() {
+                $(buttons[4]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.stackScroll.activate(element, 1);
+                    cornerstoneTools.stackScrollTouchDrag.activate(element);
                 });
-                $(buttons[5]).click(function() {
+                $(buttons[5]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.length.activate(element, 1);
                 });
-                $(buttons[6]).click(function() {
+                $(buttons[6]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.probe.activate(element, 1);
                 });
-                $(buttons[7]).click(function() {
+                $(buttons[7]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.ellipticalRoi.activate(element, 1);
                 });
-                $(buttons[8]).click(function() {
+                $(buttons[8]).on('click touchstart',function() {
                     disableAllTools();
                     cornerstoneTools.rectangleRoi.activate(element, 1);
                 });
-                $(buttons[9]).click(function() {
+                $(buttons[9]).on('click touchstart',function() {
                     var frameRate = stacks[currentStackIndex].frameRate;
                     if(frameRate === undefined) {
                         frameRate = 10;
                     }
                     cornerstoneTools.playClip(element, 31);
                 });
-                $(buttons[10]).click(function() {
+                $(buttons[10]).on('click touchstart',function() {
                     cornerstoneTools.stopClip(element);
                 });
                 $(buttons[0]).tooltip();
@@ -510,7 +518,7 @@
                         cornerstone.displayImage(thumbnail, image);
 
                     });
-                    $(seriesElement).click(function () {
+                    $(seriesElement).on('click touchstart', function () {
                         // make this series visible
                         var activeThumbnails = $(seriesList).find('a').each(function() {
                             $(this).removeClass('active');
@@ -599,10 +607,17 @@
                 // show the new tab (which will be the last one since it was just added
                 $('#tabs a:last').tab('show');
 
+                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                    $(window).trigger('resize');
+                });
+
                 // Now load the study.json
                 loadStudyJson(studyViewerCopy, study.studyId + ".json");
             });
         });
+
+
+
     });
 
     $("#help").click(function() {
@@ -615,7 +630,7 @@
 
 
     // prevent scrolling on ios
-    //document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
+    document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 
 
 </script>

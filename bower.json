@@ -17,7 +17,8 @@
         "cornerstone": "~0.3.0",
         "cornerstoneTools": "~0.2.2",
         "cornerstoneWADOImageLoader": "~0.2.2",
-        "cornerstoneWebImageLoader": "~0.2.0"
+        "cornerstoneWebImageLoader": "~0.2.0",
+        "hammerjs": "~1.0.10"
 
     },
     "devDependencies": {
