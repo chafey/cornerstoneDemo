@@ -24,7 +24,8 @@
     }
 
     .overlay {
-        position: absolute
+        position: absolute;
+        color: #e4ad00;
     }
 
     .imageViewer {
@@ -44,19 +45,20 @@
     .csthumbnail {
         color: white;
         background-color:black;
-        width:128px;
-        height:128px;
+        width:100px;
+        height:100px;
         border: 0px;
         padding: 0px;
     }
 
     .viewer {
         position: absolute;
-        left: 150px;
+        width: 100%;
+        left: 110px;
     }
 
     .thumbnailSelector {
-        width:150px;
+        width:106px;
         float:left;
         margin-left:0px;
     }
@@ -65,6 +67,7 @@
     #wrap {height:100%}
 
     .studyContainer {
+        margin-top: 2px;
         margin-left:0px;
         margin-right:0px;
         padding: 0px;
@@ -92,25 +95,25 @@
         padding: 2px;
     }
     a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
-        background-color: #999999;
-        border-color: #999999;
+        background-color: #424242;
+        border-color: #4e4e4e;
     }
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-        background-color: #999999;
-        border-color: #999999;
+        background-color: #424242;
+        border-color: #4e4e4e;
     }
 
 </style>
 <body>
 <div id="wrap">
-    <nav class="myNav navbar navbar-default" rol="navigation">
+    <nav class="myNav navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="https://github.com/chafey/cornerstone">Cornerstone</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a id="help" href="#" class="button">Help</a></li>
-                <li><a id="about" href="#" class="button">About</a></li>
+                <li><a id="help" href="#" class="button hidden-xs">Help</a></li>
+                <li><a id="about" href="#" class="button hidden-xs">About</a></li>
             </ul>
 
         </div>
@@ -146,23 +149,24 @@
             <div class="studyContainer" style="height:100%">
                 <div class="studyRow row" style="height:100%">
                     <div class="thumbnailSelector">
-                        <h4 class="text-center" style="height:20px;">Select Series</h4>
                         <div class="thumbnails list-group">
                         </div>
                     </div>
                     <div class="viewer">
                         <div class="text-center" >
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="WW/WC"><span class="fa fa-sun-o"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle-o"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
-                            <button type="button" class="btn btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="WW/WC"><span class="fa fa-sun-o"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle-o"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                            </div>
                         </div>
                         <div class="imageViewer">
                             <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
@@ -507,7 +511,7 @@
                             'unselectable="on"' +
                             'onselectstart="return false;"' +
                             'onmousedown="return false;"></div>' +
-                            "<div class='text-center'>" + stack.seriesDescription + '</div></a>';
+                            "<div class='text-center small'>" + stack.seriesDescription + '</div></a>';
                     var seriesElement = $(seriesEntry).appendTo(seriesList);
                     var thumbnail = $(seriesElement).find('div')[0];
                     cornerstone.enable(thumbnail);
