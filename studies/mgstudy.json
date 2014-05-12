@@ -1,0 +1,67 @@
+{
+    "patientName" : "MS^MG",
+    "patientId" : "1346269",
+    "studyDate" : "20010109",
+    "modality" : "MG",
+    "studyDescription" :"MAMMOGRAM",
+    "numImages" : 8,
+    "studyId" : "mgstudy",
+    "seriesList" : [
+        {
+            "seriesDescription": "MAMMOGRAM",
+            "seriesNumber" : "700",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.2683010109110300.85.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "MAMMOGRAM",
+            "seriesNumber" : "700",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.2683010109110441.87.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "MAMMOGRAM",
+            "seriesNumber" : "700",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.2683010109110523.89.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "MAMMOGRAM",
+            "seriesNumber" : "700",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.2683010109110610.91.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "BILATERAL",
+            "seriesNumber" : "699",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.16050010109110250.1.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "BILATERAL",
+            "seriesNumber" : "699",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.16050010109110432.3.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "BILATERAL",
+            "seriesNumber" : "699",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.16050010109110513.5.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "BILATERAL",
+            "seriesNumber" : "699",
+            "instanceList" : [
+                {"imageId" : "MGStudy/1.2.840.113619.2.66.2158408118.16050010109110601.7.dcm"}
+            ]
+        }
+    ]
+}

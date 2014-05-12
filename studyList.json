@@ -1,0 +1,85 @@
+{
+    "studyList": [
+        {
+            "patientName" : "MISTER^MR",
+            "patientId" : "832040",
+            "studyDate" : "20010108",
+            "modality" : "MR",
+            "studyDescription" :"BRAIN SELLA",
+            "numImages" : 17,
+            "studyId" : "mrstudy"
+        },
+        {
+            "patientName" : "MISTER^CT",
+            "patientId" : "2178309",
+            "studyDate" : "20010105",
+            "modality" : "CT",
+            "studyDescription" :"CHEST",
+            "numImages" : 111,
+            "studyId" : "ctstudy"
+        },
+        {
+            "patientName" : "MISTER^CR",
+            "patientId" : "9227465",
+            "studyDate" : "20010109",
+            "modality" : "CR",
+            "studyDescription" :"pelvis",
+            "numImages" : 2,
+            "studyId" : "crstudy"
+        },
+        {
+            "patientName" : "MISTER^DX",
+            "patientId" : "3524578",
+            "studyDate" : "20010109",
+            "modality" : "DX",
+            "studyDescription" :"CHEST",
+            "numImages" : 2,
+            "studyId" : "dxstudy"
+        },
+        {
+            "patientName" : "MS^MG",
+            "patientId" : "1346269",
+            "studyDate" : "20010109",
+            "modality" : "MG",
+            "studyDescription" :"MAMMOGRAM",
+            "numImages" : 8,
+            "studyId" : "mgstudy"
+        },
+        {
+            "patientName": "Patient^Anonymous",
+            "patientId": "12345678",
+            "studyDate": "20100510",
+            "modality": "PTCT",
+            "studyDescription": "Neck^HeadNeckPETCT",
+            "numImages": 261,
+            "studyId": "ptctstudy"
+        },
+        {
+            "patientName" : "US Echo",
+            "patientId" : "",
+            "studyDate" : "20120418",
+            "modality" : "US",
+            "studyDescription" :"US Dopler",
+            "numImages" : 22,
+            "studyId" : "usdopplerstudy"
+        },
+        {
+            "patientName" : "Dermatology",
+            "patientId" : "922746522",
+            "studyDate" : "20010109",
+            "modality" : "DERM",
+            "studyDescription" :"Skin Rash",
+            "numImages" : 2,
+            "studyId" : "dermatology"
+        },
+        {
+            "patientName" : "US JPEG",
+            "patientId" : "123454321",
+            "studyDate" : "20120418",
+            "modality" : "US",
+            "studyDescription" :"US FETAL SURVEY",
+            "numImages" : 22,
+            "studyId" : "usjpeg"
+        }
+    ]
+}

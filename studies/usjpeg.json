@@ -1,0 +1,115 @@
+{
+    "patientName" : "US JPEG",
+    "patientId" : "123454321",
+    "studyDate" : "20120418",
+    "modality" : "US",
+    "studyDescription" :"US FETAL SURVEY",
+    "numImages" : 22,
+    "studyId" : "usjpeg",
+    "seriesList" : [
+        {
+            "seriesDescription": "Image #1",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000001.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #2",
+            "seriesNumber" : "2",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000002.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #3 (clip)",
+            "seriesNumber" : "3",
+            "numberOfFrames": 96,
+            "frameRate" : 31,
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000003.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #4",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000004.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #5",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000005.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #6",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000006.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #7",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000007.dcm"}
+            ]
+        },
+        {
+            "seriesDescription": "Image #8 (clip)",
+            "seriesNumber" : "1",
+            "numberOfFrames" : 96,
+            "frameRate" : 31,
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000008.dcm"}
+            ]
+        }
+        ,{
+            "seriesDescription": "Image #9",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000009.dcm"}
+            ]
+        }
+        ,{
+            "seriesDescription": "Image #10",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000010.dcm"}
+            ]
+        }
+        ,{
+            "seriesDescription": "Image #11",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000011.dcm"}
+            ]
+        }
+        ,{
+            "seriesDescription": "Image #12",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000012.dcm"}
+            ]
+        }
+        ,{
+            "seriesDescription": "Image #13",
+            "seriesNumber" : "1",
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000013.dcm"}
+            ]
+        }
+        ,{
+            "seriesDescription": "Image #14 (clip)",
+            "seriesNumber" : "1",
+            "numberOfFrames" : 113,
+            "frameRate" : 37,
+            "instanceList" : [
+                {"imageId" : "GEOB/IMG/I_000014.dcm"}
+            ]
+        }
+    ]
+}
