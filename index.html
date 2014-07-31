@@ -174,6 +174,7 @@
                                 <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
                                 <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
                                 <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+                                <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Angle Measurement"><span class="fa fa-angle-left"></span></button>
                                 <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle-o"></span></button>
                                 <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
                                 <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
@@ -433,6 +434,7 @@ function loadStudyJson(studyViewer, studyId)
                 cornerstoneTools.zoom.activate(element, 4); // 4 is right mouse button
                 cornerstoneTools.probe.deactivate(element, 1);
                 cornerstoneTools.length.deactivate(element, 1);
+                cornerstoneTools.angle.deactivate(element, 1);
                 cornerstoneTools.ellipticalRoi.deactivate(element, 1);
                 cornerstoneTools.rectangleRoi.deactivate(element, 1);
                 cornerstoneTools.stackScroll.deactivate(element, 1);
@@ -481,26 +483,31 @@ function loadStudyJson(studyViewer, studyId)
             });
             $(buttons[6]).on('click touchstart',function() {
                 disableAllTools();
-                cornerstoneTools.probe.activate(element, 1);
+                cornerstoneTools.angle.activate(element, 1);
             });
             $(buttons[7]).on('click touchstart',function() {
                 disableAllTools();
-                cornerstoneTools.ellipticalRoi.activate(element, 1);
+                cornerstoneTools.probe.activate(element, 1);
             });
             $(buttons[8]).on('click touchstart',function() {
                 disableAllTools();
-                cornerstoneTools.rectangleRoi.activate(element, 1);
+                cornerstoneTools.ellipticalRoi.activate(element, 1);
             });
             $(buttons[9]).on('click touchstart',function() {
+                disableAllTools();
+                cornerstoneTools.rectangleRoi.activate(element, 1);
+            });
+            $(buttons[10]).on('click touchstart',function() {
                 var frameRate = stacks[currentStackIndex].frameRate;
                 if(frameRate === undefined) {
                     frameRate = 10;
                 }
                 cornerstoneTools.playClip(element, 31);
             });
-            $(buttons[10]).on('click touchstart',function() {
+            $(buttons[11]).on('click touchstart',function() {
                 cornerstoneTools.stopClip(element);
             });
+
             $(buttons[0]).tooltip();
             $(buttons[1]).tooltip();
             $(buttons[2]).tooltip();
@@ -511,6 +518,8 @@ function loadStudyJson(studyViewer, studyId)
             $(buttons[7]).tooltip();
             $(buttons[8]).tooltip();
             $(buttons[9]).tooltip();
+            $(buttons[10]).tooltip();
+            $(buttons[11]).tooltip();
 
             var seriesList = $(studyViewer).find('.thumbnails')[0];
             stacks.forEach(function(stack) {
