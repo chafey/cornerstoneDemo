@@ -1,0 +1,49 @@
+{
+  "name": "cornerstoneWADOImageLoader",
+  "version": "0.5.0",
+  "description": "Cornerstone ImageLoader for DICOM WADO",
+  "main": "dist/cornerstoneWADOImageLoader.js",
+  "ignore": [
+    "examples",
+    "src",
+    "test",
+    "gruntfile.js",
+    "package.json",
+    "README.md",
+    ".gitignore"
+  ],
+  "dependencies": {
+    "dicomParser": "~0.8.3",
+    "cornerstone": "~0.7.1",
+    "jquery": "~2.1.1",
+    "image-jpeg2000": "~0.0.1"
+  },
+  "devDependencies": {
+    "qunit": "~1.14.0"
+  },
+  "license": "MIT",
+  "authors": [
+    "Chris Hafey"
+  ],
+  "homepage": "https://github.com/chafey/cornerstoneWADOImageLoader",
+  "keywords": [
+    "DICOM",
+    "medical",
+    "imaging",
+    "WADO",
+    "cornerstone"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chafey/cornerstoneWADOImageLoader.git"
+  },
+  "_release": "0.5.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.5.0",
+    "commit": "9a58e9c6922b4e5d347c0a11b234d67ac43c6e6f"
+  },
+  "_source": "git://github.com/chafey/cornerstoneWADOImageLoader.git",
+  "_target": "~0.5.0",
+  "_originalSource": "cornerstoneWADOImageLoader"
+}

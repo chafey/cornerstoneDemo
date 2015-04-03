@@ -1,0 +1,29 @@
+{
+    "name": "cornerstoneWebImageLoader",
+    "version": "0.3.2",
+    "description": "Cornerstone ImageLoader for Web Images (PNG, JPG)",
+    "main" : "dist/cornerstoneWebImageLoader.js",
+    "ignore": [
+        "examples",
+        "src",
+        "test",
+        "gruntfile.js",
+        "package.json",
+        "README.md",
+        ".gitignore"
+    ],
+    "dependencies": {
+        "cornerstone": "~0.5.2"
+    },
+    "devDependencies": {
+        "qunit": "~1.14.0"
+    },
+    "license": "MIT",
+    "authors" : ["Chris Hafey"],
+    "homepage": "https://github.com/chafey/cornerstoneWebImageLoader",
+    "keywords": ["medical", "imaging", "JPEG", "PNG", "cornerstone"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chafey/cornerstoneWebImageLoader.git"
+    }
+}
