@@ -9,10 +9,22 @@ body {
     height: 100%;
     width: 100%;
     overflow: auto;
+    color: #888888;
+    background-color: #060606;
 }
 
 .hidden {
     display: none;
+}
+
+.modal-content {
+    background-color: #202020;
+}
+
+.btn-default {
+  color: #ffffff;
+  background-color: #424242;
+  border-color: #424242;
 }
 
 /* images are displayed in viewports */
@@ -73,7 +85,13 @@ body, html {height:100%}
     margin-right:0px;
     padding: 0px;
 }
+
 .container {
+}
+
+.navbar-default {
+  background-color: #060606;
+  border-color: #000000;
 }
 
 .thumbnails {
@@ -82,6 +100,21 @@ body, html {height:100%}
     overflow-y:scroll;
     overflow-x:hidden;
 }
+
+.table {
+  border-collapse: collapse;
+  border-color: gray;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 4px;
+    border: 1px solid #282828;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #202020;
+}
+
 .studyRow {
     margin-left: 0px;
     margin-rigth: 0px;
@@ -91,15 +124,35 @@ body, html {height:100%}
     margin:0;
 }
 
+a.list-group-item:first-child {
+   border-top-left-radius: 0px; 
+   border-top-right-radius: 0px; 
+}
+
 a.list-group-item {
     background-color: black;
     padding: 2px;
+    border: 1px solid #424242;
 }
 a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
     background-color: #424242;
     border-color: #4e4e4e;
 }
+
+.nav-tabs {
+  border-bottom: 1px solid #424242;
+}
+
+.nav-tabs>li>a {
+    background-color: #202020;
+    border-color: #424242;
+    color: #424242;
+    padding: 3px 10px;
+}
+
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
     background-color: #424242;
-    border-color: #4e4e4e;
+    border-color: #424242;
+    color: #ffffff;
+    padding: 3px 10px;
 }
