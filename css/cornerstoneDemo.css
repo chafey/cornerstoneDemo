@@ -124,11 +124,6 @@ body, html {height:100%}
     margin:0;
 }
 
-a.list-group-item:first-child {
-   border-top-left-radius: 0px; 
-   border-top-right-radius: 0px; 
-}
-
 a.list-group-item {
     background-color: black;
     padding: 2px;
