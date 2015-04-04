@@ -86,17 +86,17 @@ function loadStudy(studyViewer, studyId) {
 
 
         // On new image (displayed?)
-        function onNewImage(e) {
+        function onNewImage(e, eventData) {
             // If we are currently playing a clip then update the FPS
             // Get the state of the 'playClip tool'
             var playClipToolData = cornerstoneTools.getToolState(element, 'playClip');
 
             // If playing a clip ...
-            if (playClipToolData !== undefined && playClipToolData.data.length > 0 && playClipToolData.data[0].intervalId !== undefined && e.detail.frameRate !== undefined) {
+            if (playClipToolData !== undefined && playClipToolData.data.length > 0 && playClipToolData.data[0].intervalId !== undefined && eventData.frameRate !== undefined) {
 
                 // Update FPS
-                $(bottomLeft[0]).text("FPS: " + Math.round(e.detail.frameRate));
-                //console.log('frameRate: ' + e.detail.frameRate);
+                $(bottomLeft[0]).text("FPS: " + Math.round(eventData.frameRate));
+                console.log('frameRate: ' + e.frameRate);
 
             } else {
                 // Set FPS empty if not playing a clip
@@ -105,23 +105,24 @@ function loadStudy(studyViewer, studyId) {
                 }
             }
             // Update Image number overlay
-            $(bottomLeft[2]).text("Image #" + (stacks[currentStackIndex].currentImageIdIndex + 1) + "/" + stacks[currentStackIndex].imageIds.length);
+            $(bottomLeft[2]).text("Image # " + (stacks[currentStackIndex].currentImageIdIndex + 1) + "/" + stacks[currentStackIndex].imageIds.length);
         }
         // Add a CornerstoneNewImage event listener on the 'element' (viewer) (?)
-        element.addEventListener("CornerstoneNewImage", onNewImage, false);
+        $(element).on("CornerstoneNewImage", onNewImage);
 
 
         // On image rendered
-        function onImageRendered(e) {
+        function onImageRendered(e, eventData) {
             // Set zoom overlay text
-            $(bottomRight[0]).text("Zoom:" + e.detail.viewport.scale.toFixed(2));
+            $(bottomRight[0]).text("Zoom:" + eventData.viewport.scale.toFixed(2));
             // Set WW/WL overlay text
-            $(bottomRight[1]).text("WW/WL:" + Math.round(e.detail.viewport.voi.windowWidth) + "/" + Math.round(e.detail.viewport.voi.windowCenter));
+            $(bottomRight[1]).text("WW/WL:" + Math.round(eventData.viewport.voi.windowWidth) + "/" + Math.round(eventData.viewport.voi.windowCenter));
             // Set render time overlay text
-            $(bottomLeft[1]).text("Render Time:" + e.detail.renderTimeInMs + " ms");
+            $(bottomLeft[1]).text("Render Time:" + eventData.renderTimeInMs + " ms");
         }
         // Add a CornerstoneImageRendered event listener on the 'element' (viewer) (?)
-        element.addEventListener("CornerstoneImageRendered", onImageRendered, false);
+        $(element).on("CornerstoneImageRendered", onImageRendered);
+
 
         // Get first imageID on the current stack
         var imageId = stacks[currentStackIndex].imageIds[0];

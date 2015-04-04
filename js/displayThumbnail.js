@@ -35,13 +35,6 @@ function displayThumbnail(seriesList, seriesElement, element, stack) {
         // Prefetch the remaining images in the stack (?)
         cornerstoneTools.stackPrefetch.enable(element);
 
-        // Set the # Images overlay text with the number of image ID's
-
-        var parent = $(element).parent();
-        var childDivs = $(parent).find('.overlay');
-        var bottomLeft = $(childDivs[2]).find('div');
-        $(bottomLeft[1]).text("# Images: " + stack.imageIds.length);
-
         // Play clip if stack is a movie (has framerate)
         if (stack.frameRate !== undefined) {
             cornerstoneTools.playClip(element, stack.frameRate);
