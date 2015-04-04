@@ -1,0 +1,22 @@
+{
+  "name": "image-jpeg2000",
+  "version": "0.0.1",
+  "authors": [
+    "Jean-Francois Pambrun <jf.pambrun@gmail.com>"
+  ],
+  "description": "JPEG2000 decoder suitable for medical images inspired by mozilla's PDF.js.",
+  "main": "dist/jpx.js",
+  "keywords": [
+    "JPEG2000",
+    "Medical",
+    "Imaging"
+  ],
+  "license": "Apache Version 2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
