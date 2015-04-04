@@ -5,6 +5,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
 
+  <!-- CSS -->
+
   <!-- Font awesome CSS for tool icons -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
@@ -20,6 +22,8 @@
 
 <body>
   <div id="wrap">
+
+    <!-- Nav bar -->
     <nav class="myNav navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -29,15 +33,19 @@
           <li><a id="help" href="#" class="button hidden-xs">Help</a></li>
           <li><a id="about" href="#" class="button hidden-xs">About</a></li>
         </ul>
-
       </div>
     </nav>
+
     <div class='main'>
+
+      <!-- Tabs bar -->
       <ul id="tabs" class="nav nav-tabs" >
         <li class="active"><a href="#studyList" data-toggle="tab">Study List</a></li>
       </ul>
 
+      <!-- Tab content -->
       <div id="tabContent" class="tab-content">
+        <!-- Study list -->
         <div id="studyList" class="tab-pane active">
           <div class="row">
             <table  class="col-md-12 table table-striped">
@@ -53,50 +61,74 @@
               </thead>
               
               <tbody id="studyListData">
-
+                <!-- Table rows get populated from the JSON studyList manifest -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
+      <!-- Study viewer tab content template -->
       <div id="studyViewerTemplate" class="tab-pane active hidden" style="height:100%">
         <div class="studyContainer" style="height:100%">
           <div class="studyRow row" style="height:100%">
+
+          <!-- Thumbnails -->
             <div class="thumbnailSelector">
               <div class="thumbnails list-group">
               </div>
             </div>
+
+            <!-- Viewer -->
             <div class="viewer">
+              <!-- Toolbar -->
               <div class="text-center" >
                 <div class="btn-group">
+                  <!-- WW/WL -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="WW/WC"><span class="fa fa-sun-o"></span></button>
+                  <!-- Invert -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
+                  <!-- Zoom -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                  <!-- Pan -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows"></span></button>
+                  <!-- Stack scroll -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+                  <!-- Length measurement -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length Measurement"><span class="fa fa-arrows-v"></span></button>
+                  <!-- Angle measurement -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Angle Measurement"><span class="fa fa-angle-left"></span></button>
+                  <!-- Pixel probe -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pixel Probe"><span class="fa fa-dot-circle-o"></span></button>
+                  <!-- Elliptical ROI -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Elliptical ROI"><span class="fa fa-circle-o"></span></button>
+                  <!-- Rectangle ROI -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="fa fa-square-o"></span></button>
+                  <!-- Play clip -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span class="fa fa-play"></span></button>
+                  <!-- Stop clip -->
                   <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
                 </div>
               </div>
+
+              <!-- Viewer -->
               <div class="imageViewer">
+                <!-- Viewport wrapper-->
                 <div class="viewportWrapper" style="width:100%;height:100%;position:relative;color: white;display:inline-block;background-color:black;"
                 oncontextmenu="return false"
                 class='cornerstone-enabled-image'
                 unselectable='on'
                 onselectstart='return false;'
                 onmousedown='return false;'>
-                <div class="viewport">
-                </div>
+                  <!-- Viewport -->
+                  <div class="viewport"></div>
+
+                <!-- Overlays -->
                 <div class="overlay" style="top:0px; left:0px">
                   <div>Patient Name</div>
                   <div>Patient Id</div>
                 </div>
+
                 <div class="overlay" style="top:0px; right:0px">
                   <div>Study Description</div>
                   <div>Study Date</div>
@@ -107,10 +139,12 @@
                   <div class="renderTime">Render Time:</div>
                   <div class="currentImageAndTotalImages">Image #:</div>
                 </div>
+
                 <div class="overlay" style="bottom:0px; right:0px">
                   <div>Zoom:</div>
                   <div>WW/WC:</div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -120,6 +154,8 @@
   </div>
 </div>
 
+
+<!-- Help modal -->
 <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -145,6 +181,8 @@
   </div>
 </div>
 
+
+<!-- About modal -->
 <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -173,6 +211,9 @@
     </div>
   </div>
 </div>
+
+
+<!-- Javascripts -->
 
 <!-- Include JQuery -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
