@@ -151,3 +151,7 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
     color: #ffffff;
     padding: 3px 10px;
 }
+
+.dropdown-menu {
+  min-width: 40px;
+}
