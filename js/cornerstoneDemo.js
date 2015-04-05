@@ -9,13 +9,13 @@ $.get("templates/help.html", function(data){
 var viewportTemplate; // the viewport template
 
 $.get("templates/viewport.html", function(data) {
-    viewportTemplate = $($.parseHTML(data)[1]);
+    viewportTemplate = $($.parseHTML(data)[0]);
 });
 
 var studyViewerTemplate; // the study viewer template
 
 $.get("templates/studyViewer.html", function(data) {
-    studyViewerTemplate = $($.parseHTML(data)[1]);
+    studyViewerTemplate = $($.parseHTML(data)[0]);
 });
 
 
