@@ -46,7 +46,7 @@ $.getJSON('studyList.json', function(data) {
       // Add tab content by making a copy of the studyViewerTemplate element
       var studyViewerCopy = studyViewerTemplate.clone();
 
-      viewportCopy = viewportTemplate.clone();
+      var viewportCopy = viewportTemplate.clone();
       studyViewerCopy.find('.imageViewer').append(viewportCopy);
 
 

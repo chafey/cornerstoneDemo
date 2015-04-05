@@ -26,6 +26,7 @@ module.exports = function(grunt) {
                     'bower_components/dicomParser/dist/dicomParser.js',
                     'bower_components/bootstrap/dist/js/bootstrap.min.js',
                     'bower_components/jquery-hammerjs/jquery.hammer-full.js',
+                    'bower_components/jquery/dist/jquery.js',
                     'bower_components/jquery/dist/jquery.min.js',
                     'bower_components/jquery/dist/jquery.min.map',
                     'bower_components/bootstrap/dist/css/bootstrap.min.css'
