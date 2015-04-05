@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         copy : {
             bower: {
                 src: [
-                    'bower_components/cornerstone/dist/cornerstone.css',
+                    'bower_components/cornerstone/dist/cornerstone.min.css',
                     'bower_components/cornerstone/dist/cornerstone.js',
                     'bower_components/cornerstoneTools/dist/cornerstoneTools.js',
                     'bower_components/cornerstoneWADOImageLoader/dist/cornerstoneWADOImageLoader.js',
@@ -27,7 +27,8 @@ module.exports = function(grunt) {
                     'bower_components/bootstrap/dist/js/bootstrap.min.js',
                     'bower_components/jquery-hammerjs/jquery.hammer-full.js',
                     'bower_components/jquery/dist/jquery.min.js',
-                    'bower_components/jquery/dist/jquery.min.map'
+                    'bower_components/jquery/dist/jquery.min.map',
+                    'bower_components/bootstrap/dist/css/bootstrap.min.css'
                 ],
                 dest: 'lib',
                 expand: true,
