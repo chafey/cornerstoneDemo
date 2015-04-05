@@ -6,11 +6,15 @@ function loadStudy(studyViewer, studyId) {
     // Get the JSON data for the selected studyId
     $.getJSON('studies/' + studyId, function(data) {
 
-        // Load the first series into the viewport (?)
-        $('#wadoURL').val();
+        var imageViewer = new ImageViewer(studyViewer);
 
-        var stacks = [];
-        var currentStackIndex = 0;
+        // setup the tool buttons
+        setupButtons(studyViewer);
+
+
+        // Load the first series into the viewport (?)
+        //var stacks = [];
+        //var currentStackIndex = 0;
         var seriesIndex = 0;
 
         // Create a stack object for each series
@@ -23,6 +27,7 @@ function loadStudy(studyViewer, studyId) {
                 currentImageIdIndex: 0,
                 frameRate: series.frameRate
             };
+
 
             // Populate imageIds array with the imageIds from each series
             // For series with frame information, get the image url's by requesting each frame
@@ -48,13 +53,14 @@ function loadStudy(studyViewer, studyId) {
             }
             // Move to next series
             seriesIndex++;
+
             // Add the series stack to the stacks array
-            stacks.push(stack);
+            imageViewer.stacks.push(stack);
         });
 
         // Resize the parent div of the viewport to fit the screen
-        var imageViewer = $(studyViewer).find('.imageViewer')[0];
-        var viewportWrapper = $(imageViewer).find('.viewportWrapper')[0];
+        var imageViewerElement = $(studyViewer).find('.imageViewer')[0];
+        var viewportWrapper = $(imageViewerElement).find('.viewportWrapper')[0];
         var parentDiv = $(studyViewer).find('.viewer')[0];
 
         viewportWrapper.style.width = (parentDiv.style.width - 10) + "px";
@@ -104,8 +110,15 @@ function loadStudy(studyViewer, studyId) {
                     $(bottomLeft[0]).text("");
                 }
             }
+
+            var toolData = cornerstoneTools.getToolState(element, 'stack');
+            if(toolData === undefined || toolData.data === undefined || toolData.data.length === 0) {
+                return;
+            }
+            var stack = toolData.data[0];
+
             // Update Image number overlay
-            $(bottomLeft[2]).text("Image # " + (stacks[currentStackIndex].currentImageIdIndex + 1) + "/" + stacks[currentStackIndex].imageIds.length);
+            $(bottomLeft[2]).text("Image # " + (stack.currentImageIdIndex + 1) + "/" + stack.imageIds.length);
         }
         // Add a CornerstoneNewImage event listener on the 'element' (viewer) (?)
         $(element).on("CornerstoneNewImage", onNewImage);
@@ -125,7 +138,7 @@ function loadStudy(studyViewer, studyId) {
 
 
         // Get first imageID on the current stack
-        var imageId = stacks[currentStackIndex].imageIds[0];
+        var imageId = imageViewer.stacks[0].imageIds[0];
 
         // Image enable the dicomImage element
         cornerstone.enable(element);
@@ -133,12 +146,12 @@ function loadStudy(studyViewer, studyId) {
         // Have cornerstone load and cache the image
         cornerstone.loadAndCacheImage(imageId).then(function(image) {
 
-            setupViewport(studyViewer, element, stacks[0], image);
+            setupViewport(studyViewer, element, imageViewer.stacks[0], image);
 
             // Get series list from the series thumbnails (?)
             var seriesList = $(studyViewer).find('.thumbnails')[0];
 
-            stacks.forEach(function(stack) {
+            imageViewer.stacks.forEach(function(stack, stackIndex) {
 
                 // Create series thumbnail item
                 var seriesEntry = '<a class="list-group-item" + ' +
@@ -163,7 +176,7 @@ function loadStudy(studyViewer, studyId) {
                 cornerstone.enable(thumbnail);
 
                 // Have cornerstone load the thumbnail image
-                cornerstone.loadAndCacheImage(stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
+                cornerstone.loadAndCacheImage(imageViewer.stacks[stack.seriesIndex].imageIds[0]).then(function(image) {
                     // Make the first thumbnail active
                     if (stack.seriesIndex === 0) {
                         $(seriesElement).addClass('active');
@@ -174,7 +187,7 @@ function loadStudy(studyViewer, studyId) {
 
                 // Handle thumbnail click
                 $(seriesElement).on('click touchstart', function() {
-                        currentStackIndex = stack.seriesIndex;
+                        //currentStackIndex = stack.seriesIndex;
                     displayThumbnail(seriesList, seriesElement, element, stack);
                 });
             });

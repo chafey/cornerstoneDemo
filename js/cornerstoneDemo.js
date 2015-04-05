@@ -1,3 +1,24 @@
+// Load in HTML templates
+$.get("templates/about.html", function(data){
+    $('body').append(data);
+});
+$.get("templates/help.html", function(data){
+    $('body').append(data);
+});
+
+var viewportTemplate; // the viewport template
+
+$.get("templates/viewport.html", function(data) {
+    viewportTemplate = $($.parseHTML(data)[1]);
+});
+
+var studyViewerTemplate; // the study viewer template
+
+$.get("templates/studyViewer.html", function(data) {
+    studyViewerTemplate = $($.parseHTML(data)[1]);
+});
+
+
 // Get study list from JSON manifest
 $.getJSON('studyList.json', function(data) {
   data.studyList.forEach(function(study) {
@@ -23,7 +44,12 @@ $.getJSON('studyList.json', function(data) {
       $('#tabs').append(studyTab);
 
       // Add tab content by making a copy of the studyViewerTemplate element
-      var studyViewerCopy = $('#studyViewerTemplate').clone();
+      var studyViewerCopy = studyViewerTemplate.clone();
+
+      viewportCopy = viewportTemplate.clone();
+      studyViewerCopy.find('.imageViewer').append(viewportCopy);
+
+
       studyViewerCopy.attr("id", 'x' + study.patientId);
       // Make the viewer visible
       studyViewerCopy.removeClass('hidden');
