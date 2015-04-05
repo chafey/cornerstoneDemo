@@ -1,35 +1,14 @@
 // Load in HTML templates
-$.get("templates/about.html", function(data){
-    $('body').append(data);
-});
-$.get("templates/help.html", function(data){
-    $('body').append(data);
-});
 
 var viewportTemplate; // the viewport template
-
-$.get("templates/viewport.html", function(data) {
-    var parsed = $.parseHTML(data);
-    $.each(parsed, function(index, ele) {
-       if(ele.nodeName === 'DIV')
-       {
-           viewportTemplate = $(ele);
-       }
-    });
+loadTemplate("templates/viewport.html", function(element) {
+    viewportTemplate = element;
 });
 
 var studyViewerTemplate; // the study viewer template
-
-$.get("templates/studyViewer.html", function(data) {
-    var parsed = $.parseHTML(data);
-    $.each(parsed, function(index, ele) {
-        if(ele.nodeName === 'DIV')
-        {
-            studyViewerTemplate = $(ele);
-        }
-    });
+loadTemplate("templates/studyViewer.html", function(element) {
+    studyViewerTemplate = element;
 });
-
 
 // Get study list from JSON manifest
 $.getJSON('studyList.json', function(data) {
@@ -88,19 +67,6 @@ $('#tabs a').click (function(e) {
   e.preventDefault();
   $(this).tab('show');
 });
-
-
-// Help modal
-$("#help").click(function() {
-  $("#helpModal").modal();
-});
-
-
-// About modal
-$("#about").click(function() {
-  $("#aboutModal").modal();
-});
-
 
 // Resize main
 function resizeMain() {
