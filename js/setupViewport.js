@@ -1,4 +1,4 @@
-function setupViewport(studyViewer, element, stack, image) {
+function setupViewport(element, stack, image) {
     // Display the image on the viewer element
     cornerstone.displayImage(element, image);
 
@@ -28,5 +28,6 @@ function setupViewport(studyViewer, element, stack, image) {
     cornerstoneTools.addToolState(element, 'stack', stack);
     cornerstoneTools.stackScrollWheel.activate(element);
     cornerstoneTools.stackPrefetch.enable(element);
+
 
 }
