@@ -15,18 +15,25 @@ module.exports = function(grunt) {
         copy : {
             bower: {
                 src: [
-                    'bower_components/cornerstone/dist/cornerstone.min.css',
-                    'bower_components/cornerstone/dist/cornerstone.min.js',
-                    'bower_components/cornerstoneTools/dist/cornerstoneTools.min.js',
-                    'bower_components/cornerstoneTools/dist/cornerstoneMath.min.js',
-                    'bower_components/cornerstoneWADOImageLoader/dist/cornerstoneWADOImageLoader.min.js',
-                    'bower_components/cornerstoneWebImageLoader/dist/cornerstoneWebImageLoader.min.js',
-                    'bower_components/dicomParser/dist/dicomParser.min.js'
+                    'bower_components/cornerstone/dist/cornerstone.css',
+                    'bower_components/cornerstone/dist/cornerstone.js',
+                    'bower_components/cornerstoneTools/dist/cornerstoneTools.js',
+                    'bower_components/cornerstoneWADOImageLoader/dist/cornerstoneWADOImageLoader.js',
+                    'bower_components/cornerstoneWebImageLoader/dist/cornerstoneWebImageLoader.js',
+                    'bower_components/cornerstoneMath/dist/cornerstoneMath.js',
+                    'bower_components/cornerstone-file-image-loader/dist/cornerstoneFileImageLoader.js',
+                    'bower_components/image-jpeg2000/dist/jpx.js',
+                    'bower_components/dicomParser/dist/dicomParser.js',
+                    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                    'bower_components/jquery-hammerjs/jquery.hammer-full.js',
+                    'bower_components/jquery/dist/jquery.min.js',
+                    'bower_components/jquery/dist/jquery.min.map'
                 ],
-                dest: '',
+                dest: 'lib',
                 expand: true,
                 flatten: true
             }
+
         }
     });
 
