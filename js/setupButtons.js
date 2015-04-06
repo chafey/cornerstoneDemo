@@ -129,5 +129,6 @@ function setupButtons(studyViewer) {
     $(buttons[9]).tooltip();
     $(buttons[10]).tooltip();
     $(buttons[11]).tooltip();
+    $(buttons[12]).tooltip();
 
 };
