@@ -65,15 +65,16 @@ body {
 }
 
 .viewer {
-    position: absolute;
+    /*position: absolute;left: 110px;*/
     width: 100%;
-    left: 110px;
+    float: left;
 }
 
 .thumbnailSelector {
     width:106px;
     float:left;
     margin-left:0px;
+    height: 100%;
 }
 body, html {height:100%}
 
@@ -128,6 +129,7 @@ a.list-group-item {
     background-color: black;
     padding: 2px;
     border: 1px solid #424242;
+    z-index: 5;
 }
 a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
     background-color: #424242;

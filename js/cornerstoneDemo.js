@@ -37,8 +37,8 @@ $.getJSON('studyList.json', function(data) {
       // Add tab content by making a copy of the studyViewerTemplate element
       var studyViewerCopy = studyViewerTemplate.clone();
 
-      var viewportCopy = viewportTemplate.clone();
-      studyViewerCopy.find('.imageViewer').append(viewportCopy);
+      /*var viewportCopy = viewportTemplate.clone();
+      studyViewerCopy.find('.imageViewer').append(viewportCopy);*/
 
 
       studyViewerCopy.attr("id", 'x' + study.patientId);
@@ -56,7 +56,7 @@ $.getJSON('studyList.json', function(data) {
       });
 
       // Now load the study.json
-      loadStudy(studyViewerCopy, study.studyId + ".json");
+      loadStudy(studyViewerCopy, viewportTemplate, study.studyId + ".json");
     });
   });
 });
