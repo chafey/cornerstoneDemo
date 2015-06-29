@@ -104,7 +104,7 @@ function loadStudy(studyViewer, viewportModel, studyId) {
         var studyRow = $(studyViewer).find('.studyRow')[0];
         var width = $(studyRow).width();
 
-        $(parentDiv).width(width - 170);
+        //$(parentDiv).width(width - 170);
         //viewportWrapper.style.width = (parentDiv.style.width - 10) + "px";
         //viewportWrapper.style.height = (window.innerHeight - 150) + "px";
 
@@ -181,11 +181,11 @@ function loadStudy(studyViewer, viewportModel, studyId) {
         }
         // Resize study viewer
         function resizeStudyViewer() {
-            var studyRow = $(studyViewer).find('.studyRow')[0];
+            var studyRow = $(studyViewer).find('.studyContainer')[0];
             var height = $(studyRow).height();
-            var width = $(studyRow).width();
+            var width = $(studyRow).width();console.log($(studyRow).innerWidth(),$(studyRow).outerWidth(),$(studyRow).width());
             $(seriesList).height("100%");
-            $(parentDiv).width(width - 170);
+            $(parentDiv).width(width - $(studyViewer).find('.thumbnailSelector:eq(0)').width());
             $(parentDiv).css({height : '100%'});
             $(imageViewerElement).css({height : $(parentDiv).height() - $(parentDiv).find('.text-center:eq(0)').height()});
 

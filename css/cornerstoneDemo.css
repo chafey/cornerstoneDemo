@@ -51,7 +51,7 @@ body {
 
 .viewportWrapper {
     box-sizing: border-box;
-    border: 3px solid #ccc;
+    border: 2px solid #ccc;
 }
 .renderTime {}
 .fps {}
@@ -66,9 +66,9 @@ body {
 }
 
 .viewer {
-    /*position: absolute;left: 110px;*/
-    width: 100%;
+    /*position: absolute;left: 110px;width: 100%;*/
     float: left;
+    box-sizing: border-box;
 }
 
 .thumbnailSelector {
