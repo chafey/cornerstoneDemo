@@ -51,7 +51,7 @@ body {
 
 .viewportWrapper {
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 2px solid #2f4f4f;
 }
 .renderTime {}
 .fps {}
