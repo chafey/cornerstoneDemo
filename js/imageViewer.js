@@ -40,8 +40,8 @@ ImageViewer = function(root, viewport) {
     }
 
     self.forEachElement = function(cb) {
-      self.viewports.forEach(function(vp){
-        cb.call(self, vp.find('.viewport')[0], vp);
+      self.viewports.forEach(function(vp, i){
+        cb.call(self, vp.find('.viewport')[0], vp, i);
       });
     }
 }

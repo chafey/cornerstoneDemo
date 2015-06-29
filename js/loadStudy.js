@@ -25,10 +25,24 @@ function loadStudy(studyViewer, viewportModel, studyId) {
 
         // layout choose
         $(studyViewer).find('.choose-layout a').click(function(){
+            var previousUsed = [];
+            imageViewer.forEachElement(function(el, vp, i){
+                if (!isNaN($(el).data('useStack'))) {
+                    previousUsed.push($(el).data('useStack'));
+                }
+            });
+
             var type = $(this).text();
             imageViewer.setLayout(type);
             initViewports();
             resizeStudyViewer();
+            if (previousUsed.length > 0) {
+                previousUsed = previousUsed.slice(0, imageViewer.viewports.length);
+                var item = 0;
+                previousUsed.forEach(function(v){
+                    useItemStack(item++, v);
+                });
+            }
 
             //return false;
         });
@@ -151,6 +165,7 @@ function loadStudy(studyViewer, viewportModel, studyId) {
                 imageViewer.viewports[item].find('.overlay-text').remove();
                 $(element).data('waiting', false);
             }
+            $(element).data('useStack', stack);
 
             displayThumbnail(seriesList, $(seriesList).find('.list-group-item')[stack], element, imageViewer.stacks[stack], function(el, stack){
                 if (!$(el).data('setup')) {
