@@ -1,4 +1,4 @@
-function displayThumbnail(seriesList, seriesElement, element, stack) {
+function displayThumbnail(seriesList, seriesElement, element, stack, loaded) {
     // Deactivate other thumbnails
     $(seriesList).find('a').each(function() {
         $(this).removeClass('active');
@@ -9,15 +9,21 @@ function displayThumbnail(seriesList, seriesElement, element, stack) {
     // Make the selected thumbnail active
     $(seriesElement).addClass('active');
 
-    // Stop clip from if playing on element
-    cornerstoneTools.stopClip(element);
-    // Disable stack scrolling
-    cornerstoneTools.stackScroll.disable(element);
-    // Enable stackScroll on selected series
-    cornerstoneTools.stackScroll.enable(element);
+    var enabledImage = cornerstone.getEnabledElement(element);
+    if (enabledImage.image) {
+        // Stop clip from if playing on element
+        cornerstoneTools.stopClip(element);
+        // Disable stack scrolling
+        cornerstoneTools.stackScroll.disable(element);
+        // Enable stackScroll on selected series
+        cornerstoneTools.stackScroll.enable(element);
+    }
 
     // Load the first image of the selected series stack
     cornerstone.loadAndCacheImage(stack.imageIds[0]).then(function(image) {
+        if (loaded) {
+            loaded.call(image, element, stack);
+        }
         // Get the default viewport
         var defViewport = cornerstone.getDefaultViewport(element, image);
         // Get the current series stack index
