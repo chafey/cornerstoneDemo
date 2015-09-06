@@ -13,15 +13,14 @@
     ".gitignore"
   ],
   "dependencies": {
-    "cornerstone": "~0.7.3",
-    "cornerstoneTools": "~0.6.2",
-    "cornerstoneWADOImageLoader": "~0.5.2",
-    "cornerstoneWebImageLoader": "~0.4.2",
-    "cornerstoneMath": "~0.1.1",
-    "cornerstone-file-image-loader": "0.5.1",
-    "image-jpeg2000": "0.0.1",
+    "cornerstone": "~0.8.1",
+    "cornerstoneTools": "~0.7.0",
+    "cornerstoneWADOImageLoader": "~0.7.0",
+    "cornerstoneWebImageLoader": "~0.5.2",
+    "cornerstoneMath": "~0.1.2",
+    "image-jpeg2000": "~0.3.1",
     "bootstrap": "~3.3.4",
-    "hammerjs": "~1.0.10",
+    "hammerjs": "~2.0.4",
     "jquery" : "~2.1.1"
   },
   "devDependencies": {

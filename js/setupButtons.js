@@ -98,14 +98,14 @@ function setupButtons(studyViewer) {
 
     // Play clip
     $(buttons[10]).on('click touchstart', function() {
-        var frameRate = stack.frameRate;
-
-        // Play at a default 10 FPS if the framerate is not specified
-        if (frameRate === undefined) {
-            frameRate = 10;
-        }
         forEachViewport(function(element) {
-            cornerstoneTools.playClip(element, frameRate);
+          var stackState = cornerstoneTools.getToolState(element, 'stack');
+          var frameRate = stackState.data[0].frameRate;
+          // Play at a default 10 FPS if the framerate is not specified
+          if (frameRate === undefined) {
+            frameRate = 10;
+          }
+          cornerstoneTools.playClip(element, frameRate);
         });
     });
 
