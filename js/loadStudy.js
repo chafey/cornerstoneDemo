@@ -154,8 +154,7 @@ function loadStudy(studyViewer, viewportModel, studyId) {
 
             // Handle thumbnail click
             $(seriesElement).on('click touchstart', function() {
-                    //currentStackIndex = stack.seriesIndex;
-                //displayThumbnail(seriesList, seriesElement, element, stack);
+              useItemStack(0, stackIndex);
             }).data('stack', stackIndex);
         });
 
