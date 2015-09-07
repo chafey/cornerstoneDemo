@@ -24,19 +24,19 @@ function displayThumbnail(seriesList, seriesElement, element, stack, loaded) {
         if (loaded) {
             loaded.call(image, element, stack);
         }
-        // Get the default viewport
-        var defViewport = cornerstone.getDefaultViewport(element, image);
-        // Get the current series stack index
-
-        // Display the image
-        cornerstone.displayImage(element, image, defViewport);
-        // Fit the image to the viewport window
-        cornerstone.fitToWindow(element);
 
         // Get the state of the stack tool
         var stackState = cornerstoneTools.getToolState(element, 'stack');
         stackState.data[0] = stack;
         stackState.data[0].currentImageIdIndex = 0;
+
+        // Get the default viewport
+        var defViewport = cornerstone.getDefaultViewport(element, image);
+        // Get the current series stack index
+        // Display the image
+        cornerstone.displayImage(element, image, defViewport);
+        // Fit the image to the viewport window
+        cornerstone.fitToWindow(element);
 
         // Prefetch the remaining images in the stack (?)
         cornerstoneTools.stackPrefetch.enable(element);
