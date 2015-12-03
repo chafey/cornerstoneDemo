@@ -1,5 +1,5 @@
 
-function setupButtons(studyViewer) {
+function setupButtons(studyViewer, viewportModel) {
     // Get the button elements
     var buttons = $(studyViewer).find('button');
 
@@ -75,29 +75,46 @@ function setupButtons(studyViewer) {
     // Pixel probe
     $(buttons[7]).on('click touchstart', function() {
         disableAllTools();
+       
         forEachViewport(function(element) {
             cornerstoneTools.probe.activate(element, 1);
         });
     });
-
-    // Elliptical ROI
-    $(buttons[8]).on('click touchstart', function() {
+    // remove measurements
+	$(buttons[8]).on('click touchstart', function() {
         disableAllTools();
+       
+        forEachViewport(function(element) {
+			cornerstoneTools.clearToolState(element, "length");
+			cornerstoneTools.clearToolState(element, "angle");
+			cornerstoneTools.clearToolState(element, "probe");
+			cornerstoneTools.clearToolState(element, "ellipticalRoi");
+			cornerstoneTools.clearToolState(element, "rectangleRoi");
+            cornerstone.updateImage(element);
+            
+        });
+    });
+	
+    // Elliptical ROI
+    $(buttons[9]).on('click touchstart', function() {
+        disableAllTools();
+       
         forEachViewport(function(element) {
             cornerstoneTools.ellipticalRoi.activate(element, 1);
         });
     });
 
     // Rectangle ROI
-    $(buttons[9]).on('click touchstart', function() {
+    $(buttons[10]).on('click touchstart', function() {
         disableAllTools();
+       
         forEachViewport(function (element) {
             cornerstoneTools.rectangleRoi.activate(element, 1);
         });
     });
 
     // Play clip
-    $(buttons[10]).on('click touchstart', function() {
+    $(buttons[11]).on('click touchstart', function() {
         forEachViewport(function(element) {
           var stackState = cornerstoneTools.getToolState(element, 'stack');
           var frameRate = stackState.data[0].frameRate;
@@ -110,11 +127,14 @@ function setupButtons(studyViewer) {
     });
 
     // Stop clip
-    $(buttons[11]).on('click touchstart', function() {
+    $(buttons[12]).on('click touchstart', function() {
         forEachViewport(function(element) {
             cornerstoneTools.stopClip(element);
         });
     });
+	
+	
+	
 
     // Tooltips
     $(buttons[0]).tooltip();
@@ -130,5 +150,6 @@ function setupButtons(studyViewer) {
     $(buttons[10]).tooltip();
     $(buttons[11]).tooltip();
     $(buttons[12]).tooltip();
+	
 
 };

@@ -8,12 +8,12 @@ function setupViewport(element, stack, image) {
     }
 
     // Activate mouse clicks, mouse wheel and touch
-    cornerstoneTools.mouseInput.enable(element);
+     cornerstoneTools.mouseInput.enable(element);
     cornerstoneTools.mouseWheelInput.enable(element);
     cornerstoneTools.touchInput.enable(element);
 
     // Enable all tools we want to use with this element
-    cornerstoneTools.wwwc.activate(element, 1); // ww/wc is the default tool for left mouse button
+ /*   cornerstoneTools.wwwc.activate(element, 1); // ww/wc is the default tool for left mouse button
     cornerstoneTools.pan.activate(element, 2); // pan is the default tool for middle mouse button
     cornerstoneTools.zoom.activate(element, 4); // zoom is the default tool for right mouse button
     cornerstoneTools.probe.enable(element);
@@ -21,7 +21,7 @@ function setupViewport(element, stack, image) {
     cornerstoneTools.ellipticalRoi.enable(element);
     cornerstoneTools.rectangleRoi.enable(element);
     cornerstoneTools.wwwcTouchDrag.activate(element);
-    cornerstoneTools.zoomTouchPinch.activate(element);
+    cornerstoneTools.zoomTouchPinch.activate(element); */
 
     // Stack tools
     cornerstoneTools.addStackStateManager(element, ['playClip']);

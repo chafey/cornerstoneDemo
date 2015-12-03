@@ -21,7 +21,40 @@ function loadStudy(studyViewer, viewportModel, studyId) {
         }
 
         // setup the tool buttons
-        setupButtons(studyViewer);
+        setupButtons(studyViewer, viewportModel);
+		
+		// 3D MPR button
+		var buttons = $(studyViewer).find('button');
+		$(buttons[12]).on('click touchstart', function() {
+		 disableAllTools();        
+		 
+         var previousUsed = [];
+		 imageViewer.forEachElement(function(el, vp, i){
+			 if (!isNaN($(el).data('useStack'))) {
+				 previousUsed.push($(el).data('useStack'));
+				 }
+				 }
+				 );
+				 
+		imageViewer.setLayout('2x2'); // default layout
+	    initViewports();
+		resizeStudyViewer();
+		
+		if (previousUsed.length > 0) {
+			previousUsed = previousUsed.slice(0, imageViewer.viewports.length);
+			var item = 0;
+			previousUsed.forEach(function(v){
+				useItemStack(item++, v);
+                });
+				} 
+				
+		cornerstoneTools.mpr.activate(imageViewer.getElement(0), 1, imageViewer.getElement(1), imageViewer.getElement(2));	
+		});
+				
+			
+		$(buttons[13]).tooltip();
+		
+		
 
         // layout choose
         $(studyViewer).find('.choose-layout a').click(function(){
