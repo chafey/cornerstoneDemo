@@ -3,9 +3,11 @@ Cornerstone Demo
 
 Demonstration application that shows how to use the various cornerstone components together.  
 
-**NOTE - the code in this branch is not current, please check the gh-pages branch for the latest.**
+[View the live demo here](http://chafey.github.io/cornerstoneDemo/)
 
-[View it here](http://chafey.github.io/cornerstoneDemo/)
+
+The source code for this application is in the [gh-pages branch](https://github.com/chafey/cornerstoneDemo/tree/gh-pages)
+
 
 
 
